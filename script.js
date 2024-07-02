@@ -122,7 +122,7 @@ function save_edit() {
 	if (page.name != selected_page) {return page;}
 	page.name = page_name_input.value;
 	page.text = page_text_input.value;
-	page.next = page_buttons_input.value.split(',').map(e=>e.split(':')).map(e=>{return {name: e[0], text: e[1]};});
+	page.next = page_buttons_input.value.split(',').filter(e=>e.length).map(e=>e.split(':')).map(e=>{return {name: e[0], text: e[1]};});
 	return page;
     });
 }
