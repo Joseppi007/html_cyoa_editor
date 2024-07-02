@@ -8,7 +8,8 @@
   </head>
   <body>
     <div class="header">
-      <button onclick="file_menu.showModal();">File</button>
+      <button onclick="close_modals();file_menu.showModal();">File</button>
+      <button onclick="story_edit();">Edit</button>
       <button onclick="story_start();">Play</button>
     </div>
     <dialog aria-modal="true" id="file_menu">
@@ -25,6 +26,39 @@
       </div>
       <div id="story_footer" class="footer" style="font-size: 1.2em;">
 	<button>test</button><button>test</button>
+      </div>
+    </dialog>
+    <dialog aria-modal="true" id="page_list_modal" class="hidden-overflow">
+      <button class="close" onclick="page_list_modal.close();">&times;</button>
+      <div id="page_list_div" class="scroll-overflow" style="height: 100%;">
+	<h1>Page List</h1>
+	<p>
+	  This is a list of all of the pages in the story. Select a page to choose an action to do with it, including reading starting from that page, setting it to the first page of the story, removing it, or editing it.
+	</p>
+	<ul class="vert-button-list" id="page_list">
+	</ul>
+      </div>
+    </dialog>
+    <dialog aria-modal="true" id="page_options_modal" class="hidden-overflow">
+      <button class="close" onclick="page_options_modal.close();">&times;</button>
+      <h1>Page Options</h1>
+      <p>
+	What would you like to do with this page?
+      </p>
+      <ul class="vert-button-list">
+	<li><button onclick="edit_page(selected_page);">Edit</button></li>
+	<li><button onclick="read_page(selected_page);">Read From Here</button></li>
+	<li><button onclick="make_first_page(selected_page);">Make This The First Page</button></li>
+	<li><button onclick="delete_page(selected_page);close_modals();" class="danger">Delete This Page</button></li>
+      </ul>
+    </dialog>
+    <dialog aria-modal="true" id="edit_modal" class="hidden-overflow">
+      <button class="close" onclick="edit_modal.close();">&times;</button>
+      <div id="edit_div" class="scroll-overflow" style="height: 100%;">
+	<h1><input id="page_name_input"></input></h1>
+	<textarea id="page_text_input"></textarea><br/>
+	<textarea id="page_buttons_input"></textarea><br/>
+	<button onclick="save_edit();">Save Changes</button>
       </div>
     </dialog>
   </body>

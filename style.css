@@ -8,12 +8,12 @@
     --tertiary-bg: #fb7300;
     --tertiary-fg: #048cff;
     --transparent: #01234567;
-    --close-bg: #dd3333;
-    --close-fg: #8f0710;
-    --close2-bg: #bb2222;
-    --close2-fg: #6f060c;
-    --close3-bg: #aa1b1b;
-    --close3-fg: #5f0710;
+    --close-bg: #ff8888;
+    --close-fg: #880000;
+    --close2-bg: #ffaaaa;
+    --close2-fg: #660000;
+    --close3-bg: #ffcccc;
+    --close3-fg: #440000;
     --contrast-bg: #000;
     --contrast-fg: #fff;
 }
@@ -83,20 +83,27 @@ dialog {
 }
 
 button.close {
-    background-color: var(--close-bg);
-    color: var(--close-fg);
     width: 2em;
     position: absolute;
     top: 0.5em;
     right: 0.5em;
 }
 
-button.close:hover {
+button.danger {
+    font-size: 0.8em;
+}
+
+button.close, button.danger {
+    background-color: var(--close-bg);
+    color: var(--close-fg);
+}
+
+button.close:hover, button.danger:hover {
     background-color: var(--close2-bg);
     color: var(--close2-fg);
 }
 
-button.close:active {
+button.close:active, button.danger:active {
     background-color: var(--close3-bg);
     color: var(--close3-fg);
 }
@@ -120,4 +127,16 @@ dialog::backdrop {
 ::selection {
     background-color: var(--contrast-bg);
     color: var(--contrast-fg);
+}
+
+.vert-button-list {
+    padding: 0px;
+}
+
+.vert-button-list ::marker {
+    content: none;
+}
+
+.vert-button-list li button {
+    width: calc(100% - 32px);
 }
