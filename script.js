@@ -1,7 +1,7 @@
 let args = location.search.substr(1).split('&').map(e=>e.split('=')).reduce((a,b)=>{a[b[0]] = b[1]; return a;}, {}) ;
 let selected_page = "No page selected";
 
-story_data = {title:'Untitled',description:'This story does not have a description.',pages:[{name:'Hello, World!',text:'This is a placeholder.',next:[{name:'Welld, Horlo!',text:'==>'}],first:true},{name:'Welld, Horlo!',text:'phir is a tlaceholdes.',next:[{name:'Hello, World!',text:'==>'}],first:false}]};
+story_data = {title:'Untitled',description:'This story does not have a description.',pages:[{name:'Hello World',text:'This is a placeholder.',next:[{name:'Welld Horlo',text:'==>'}],first:true},{name:'Welld Horlo',text:'phir is a tlaceholdes.',next:[{name:'Hello World',text:'==>'}],first:false}]};
 
 function story_start() {
     let firsts = story_data.pages.filter(page=>page.first);
@@ -119,9 +119,10 @@ function close_modals() {
 
 function save_edit() {
     story_data.pages = story_data.pages.map(page=>{
-	if (page.name != selected_page) {return;}
+	if (page.name != selected_page) {return page;}
 	page.name = page_name_input.value;
 	page.text = page_text_input.value;
-	page.next = page_buttons_input.value.split(',').map(e=>e.split(':')).reduce((a,b)=>{a[b[0]]=b[1];return a;}, {});
+	page.next = page_buttons_input.value.split(',').map(e=>e.split(':')).map(e=>{return {name: e[0], text: e[1]};});
+	return page;
     });
 }
