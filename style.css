@@ -1,0 +1,102 @@
+:root {
+    --main-bg: #fedcba;
+    --main-fg: #012345;
+    --primary-bg: #fdb976;
+    --primary-fg: #02468a;
+    --secondary-bg: #fc9630;
+    --secondary-fg: #0369cf;
+    --tertiary-bg: #fb7300;
+    --tertiary-fg: #048cff;
+    --transparent: #01234567;
+    --close-bg: #dd3333;
+    --close-fg: #8f0710;
+    --close2-bg: #bb2222;
+    --close2-fg: #6f060c;
+    --close3-bg: #aa1b1b;
+    --close3-fg: #5f0710;
+}
+
+body {
+    background-color: var(--main-bg);
+    color: var(--main-fg);
+}
+
+div.header {
+    background-color: var(--primary-fg);
+    width: 15em;
+    height: 3em;
+    align-content: center;
+    text-align: center;
+    position: absolute;
+    top: 0em;
+    left: calc(50vw - 7.5em);
+    padding: 0em;
+    margin: 0em;
+    border-bottom-left-radius: 1.5em;
+    border-bottom-right-radius: 1.5em;
+}
+
+button {
+    border: none;
+    height: 2em;
+    border-radius: 1em;
+    background-color: var(--primary-bg);
+    color: var(--primary-fg);
+    font-size: 1em;
+    font-weight: bold;
+    padding: 0em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    margin: 0.5em;
+    transition: all 0.4s;
+}
+
+button:hover {
+    background-color: var(--secondary-bg);
+    color: var(--secondary-fg);
+}
+
+button:active {
+    background-color: var(--tertiary-bg);
+    color: var(--tertiary-fg);
+}
+
+div.header button {
+    width: 5em;
+}
+
+dialog {
+    border: none;
+    border-radius: 1em;
+    width: 75%;
+    height: 75%;
+    background-color: var(--main-bg);
+    color: var(--main-fg);
+}
+
+button.close {
+    background-color: var(--close-bg);
+    color: var(--close-fg);
+    width: 2em;
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+}
+
+button.close:hover {
+    background-color: var(--close2-bg);
+    color: var(--close2-fg);
+}
+
+button.close:active {
+    background-color: var(--close3-bg);
+    color: var(--close3-fg);
+}
+
+dialog::backdrop {
+    background-color: var(--transparent);
+}
+
+.mono {
+    font-family: mono;
+}
