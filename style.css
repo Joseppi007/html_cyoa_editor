@@ -21,19 +21,24 @@ body {
     color: var(--main-fg);
 }
 
-div.header {
+div.header, div.footer {
     background-color: var(--primary-fg);
-    width: 15em;
+    width: 100%;
     height: 3em;
     align-content: center;
     text-align: center;
     position: absolute;
-    top: 0em;
-    left: calc(50vw - 7.5em);
+    left: 0em;
     padding: 0em;
     margin: 0em;
-    border-bottom-left-radius: 1.5em;
-    border-bottom-right-radius: 1.5em;
+}
+
+div.header {
+    top: 0em;
+}
+
+div.footer {
+    bottom: 0em;
 }
 
 button {
@@ -99,4 +104,12 @@ dialog::backdrop {
 
 .mono {
     font-family: mono;
+}
+
+.scroll-overflow {
+    overflow: scroll;
+}
+
+.hidden-overflow {
+    overflow: hidden;
 }

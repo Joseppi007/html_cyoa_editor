@@ -4,11 +4,12 @@
     <meta charset="utf-8"/>
     <title>CYOA Engine</title>
     <link rel="stylesheet" href="style.css"/>
+    <script src="script.js"></script>
   </head>
   <body>
     <div class="header">
       <button onclick="file_menu.showModal();">File</button>
-      <button onclick="">Play</button>
+      <button onclick="story_start();">Play</button>
     </div>
     <dialog aria-modal="true" id="file_menu">
       <button class="close" onclick="file_menu.close();">&times;</button>
@@ -16,6 +17,15 @@
       <p>Save your story to a <span class="mono">.JSON</span> file or load a <span class="mono">.JSON</span> file.</p>
       <button>Save</button>
       <button>Load</button>
+    </dialog>
+    <dialog aria-modal="true" id="story_modal" class="hidden-overflow">
+      <button class="close" onclick="story_modal.close();">&times;</button>
+      <div id="story_div" class="scroll-overflow" style="height: calc(100% - 3em);">
+	This is a placeholder.
+      </div>
+      <div id="story_footer" class="footer" style="font-size: 1.2em;">
+	<button>test</button><button>test</button>
+      </div>
     </dialog>
   </body>
 </html>
