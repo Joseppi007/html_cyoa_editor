@@ -126,3 +126,9 @@ function save_edit() {
 	return page;
     });
 }
+
+function open_file_menu() {
+    story_data_json.value = JSON.stringify(story_data);
+    close_modals();
+    file_menu.showModal();
+}

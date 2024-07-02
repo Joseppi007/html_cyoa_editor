@@ -8,16 +8,15 @@
   </head>
   <body>
     <div class="header">
-      <button onclick="close_modals();file_menu.showModal();">File</button>
+      <button onclick="open_file_menu();">File</button>
       <button onclick="story_edit();">Edit</button>
       <button onclick="story_start();">Play</button>
     </div>
     <dialog aria-modal="true" id="file_menu">
       <button class="close" onclick="file_menu.close();">&times;</button>
       <h1>File</h1>
-      <p>Save your story to a <span class="mono">.JSON</span> file or load a <span class="mono">.JSON</span> file.</p>
-      <button>Save</button>
-      <button>Load</button>
+      <p>Save your story to a <span class="mono">.JSON</span> file or load a <span class="mono">.JSON</span> file.<br/>I thought about having a whole file manipulation piece of code, but then I remembered you can probably just copy/paste from the below textarea.</p>
+      <textarea id="story_data_json" onchange="story_data=JSON.parse(this.value);"></textarea>
     </dialog>
     <dialog aria-modal="true" id="story_modal" class="hidden-overflow">
       <button class="close" onclick="story_modal.close();">&times;</button>
