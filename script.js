@@ -118,7 +118,7 @@ function close_modals() {
 }
 
 function save_edit() {
-    story_data = story_data.pages.map(page=>{
+    story_data.pages = story_data.pages.map(page=>{
 	if (page.name != selected_page) {return;}
 	page.name = page_name_input.value;
 	page.text = page_text_input.value;
