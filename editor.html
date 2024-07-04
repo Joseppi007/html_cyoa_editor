@@ -18,7 +18,7 @@
       <button class="close" onclick="file_menu.close();">&times;</button>
       <h1>File</h1>
       <p>Save your story to a <span class="mono">.JSON</span> file or load a <span class="mono">.JSON</span> file.<br/>I thought about having a whole file manipulation piece of code, but then I remembered you can probably just copy/paste from the below textarea.</p>
-      <textarea id="story_data_json" onchange="story_data=JSON.parse(this.value);"></textarea>
+      <textarea id="story_data_json" onchange="story_data=JSON.parse(this.value);" style="width:90%;height:50%;"></textarea>
     </dialog>
     <dialog aria-modal="true" id="story_modal" class="hidden-overflow">
       <button class="close" onclick="story_modal.close();">&times;</button>
