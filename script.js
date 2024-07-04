@@ -191,3 +191,16 @@ function open_file_menu() {
     close_modals();
     file_menu.showModal();
 }
+
+function figure_out_theme() {
+    if (args.theme != undefined) { args.theme = args.theme.toLowerCase(); }
+    while (args.theme != 'l' && args.theme != 'd' && args.theme != 'light' && args.theme != 'dark' && args.theme != 'light mode' && args.theme != 'dark mode') {
+	let answer = prompt("Please enter the first letter of your prefered theme:\n[L]ight mode\n[D]ark mode");
+	if (answer == null) {
+	    answer = (Math.random()>0.5)?'l':'d';
+	}
+	args.theme = answer.toLowerCase();
+    }
+    if (args.theme == 'l' || args.theme == 'light' || args.theme == 'light mode') { document.body.classList += ' light-mode'; }
+    if (args.theme == 'd' || args.theme == 'dark' || args.theme == 'dark mode') { document.body.classList += ' dark-mode'; }
+}

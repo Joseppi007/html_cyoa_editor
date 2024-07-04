@@ -1,21 +1,97 @@
 :root {
-    --main-bg: #fedcba;
-    --main-fg: #012345;
-    --primary-bg: #fdb976;
-    --primary-fg: #02468a;
-    --secondary-bg: #fc9630;
-    --secondary-fg: #0369cf;
-    --tertiary-bg: #fb7300;
-    --tertiary-fg: #048cff;
-    --transparent: #01234567;
-    --close-bg: #ff8888;
-    --close-fg: #880000;
-    --close2-bg: #ffaaaa;
-    --close2-fg: #660000;
-    --close3-bg: #ffcccc;
-    --close3-fg: #440000;
-    --contrast-bg: #000;
-    --contrast-fg: #fff;
+    --light-main-bg: #fedcba;
+    --light-main-fg: #012345;
+    --light-primary-bg: #fdb976;
+    --light-primary-fg: #02468a;
+    --light-secondary-bg: #fc9630;
+    --light-secondary-fg: #0369cf;
+    --light-tertiary-bg: #fb7300;
+    --light-tertiary-fg: #048cff;
+    --light-transparent: #01234567;
+    --light-close-bg: #ff8888;
+    --light-close-fg: #880000;
+    --light-close2-bg: #ffaaaa;
+    --light-close2-fg: #660000;
+    --light-close3-bg: #ffcccc;
+    --light-close3-fg: #440000;
+    --light-contrast-bg: #000;
+    --light-contrast-fg: #fff;
+
+    --dark-main-bg: #fedcba;
+    --dark-main-fg: #012345;
+    --dark-primary-bg: #fdb976;
+    --dark-primary-fg: #02468a;
+    --dark-secondary-bg: #fc9630;
+    --dark-secondary-fg: #0369cf;
+    --dark-tertiary-bg: #fb7300;
+    --dark-tertiary-fg: #048cff;
+    --dark-transparent: #01234567;
+    --dark-close-bg: #ff8888;
+    --dark-close-fg: #880000;
+    --dark-close2-bg: #ffaaaa;
+    --dark-close2-fg: #660000;
+    --dark-close3-bg: #ffcccc;
+    --dark-close3-fg: #440000;
+    --dark-contrast-bg: #000;
+    --dark-contrast-fg: #fff;
+
+    --main-bg: var(--light-main-bg);
+    --main-fg: var(--light-main-fg);
+    --primary-bg: var(--light-primary-bg);
+    --primary-fg: var(--light-primary-fg);
+    --secondary-bg: var(--light-secondary-bg);
+    --secondary-fg: var(--light-secondary-fg);
+    --tertiary-bg: var(--light-tertiary-bg);
+    --tertiary-fg: var(--light-tertiary-fg);
+    --transparent: var(--light-transparent);
+    --close-bg: var(--light-close-bg);
+    --close-fg: var(--light-close-fg);
+    --close2-bg: var(--light-close2-bg);
+    --close2-fg: var(--light-close2-fg);
+    --close3-bg: var(--light-close3-bg);
+    --close3-fg: var(--light-close3-fg);
+    --contrast-bg: var(--light-contrast-bg);
+    --contrast-fg: var(--light-contrast-fg);
+}
+
+body.light-mode {
+    --main-bg: var(--light-main-bg);
+    --main-fg: var(--light-main-fg);
+    --primary-bg: var(--light-primary-bg);
+    --primary-fg: var(--light-primary-fg);
+    --secondary-bg: var(--light-secondary-bg);
+    --secondary-fg: var(--light-secondary-fg);
+    --tertiary-bg: var(--light-tertiary-bg);
+    --tertiary-fg: var(--light-tertiary-fg);
+    --transparent: var(--light-transparent);
+    --close-bg: var(--light-close-bg);
+    --close-fg: var(--light-close-fg);
+    --close2-bg: var(--light-close2-bg);
+    --close2-fg: var(--light-close2-fg);
+    --close3-bg: var(--light-close3-bg);
+    --close3-fg: var(--light-close3-fg);
+    --contrast-bg: var(--light-contrast-bg);
+    --contrast-fg: var(--light-contrast-fg);
+}
+
+body.dark-mode {
+    --main-bg: var(--dark-main-bg);
+    --main-fg: var(--dark-main-fg);
+    --primary-bg: var(--dark-primary-bg);
+    --primary-fg: var(--dark-primary-fg);
+    --secondary-bg: var(--dark-secondary-bg);
+    --secondary-fg: var(--dark-secondary-fg);
+    --tertiary-bg: var(--dark-tertiary-bg);
+    --tertiary-fg: var(--dark-tertiary-fg);
+    --transparent: var(--dark-transparent);
+    --close-bg: var(--dark-close-bg);
+    --close-fg: var(--dark-close-fg);
+    --close2-bg: var(--dark-close2-bg);
+    --close2-fg: var(--dark-close2-fg);
+    --close3-bg: var(--dark-close3-bg);
+    --close3-fg: var(--dark-close3-fg);
+    --contrast-bg: var(--dark-contrast-bg);
+    --contrast-fg: var(--dark-contrast-fg);
 }
 
 body {
