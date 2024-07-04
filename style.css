@@ -16,24 +16,30 @@
     --light-close3-fg: #440000;
     --light-contrast-bg: #000;
     --light-contrast-fg: #fff;
+    --light-ta-bg: #fed;
+    --light-ta-fg: #012;
+    --light-header-bg: var(--light-primary-fg);
 
-    --dark-main-bg: #fedcba;
-    --dark-main-fg: #012345;
-    --dark-primary-bg: #fdb976;
-    --dark-primary-fg: #02468a;
-    --dark-secondary-bg: #fc9630;
-    --dark-secondary-fg: #0369cf;
-    --dark-tertiary-bg: #fb7300;
-    --dark-tertiary-fg: #048cff;
-    --dark-transparent: #01234567;
-    --dark-close-bg: #ff8888;
-    --dark-close-fg: #880000;
-    --dark-close2-bg: #ffaaaa;
-    --dark-close2-fg: #660000;
-    --dark-close3-bg: #ffcccc;
-    --dark-close3-fg: #440000;
-    --dark-contrast-bg: #000;
-    --dark-contrast-fg: #fff;
+    --dark-main-bg: #234;
+    --dark-main-fg: #f8eeff;
+    --dark-primary-bg: #345;
+    --dark-primary-fg: #edf;
+    --dark-secondary-bg: #3d4e5f;
+    --dark-secondary-fg: #e0d0ff;
+    --dark-tertiary-bg: #4a5c6f;
+    --dark-tertiary-fg: #d9c8ff;
+    --dark-transparent: #123a;
+    --dark-close-bg: var(--light-close-bg);
+    --dark-close-fg: var(--light-close-fg);
+    --dark-close2-bg: var(--light-close2-bg);
+    --dark-close2-fg: var(--light-close2-fg);
+    --dark-close3-bg: var(--light-close3-bg);
+    --dark-close3-fg: var(--light-close3-fg);
+    --dark-contrast-bg: #fff;
+    --dark-contrast-fg: #000;
+    --dark-ta-bg: #123;
+    --dark-ta-fg: #fbf4ff;
+    --dark-header-bg: #705f8f;
 
     --main-bg: var(--light-main-bg);
     --main-fg: var(--light-main-fg);
@@ -52,6 +58,9 @@
     --close3-fg: var(--light-close3-fg);
     --contrast-bg: var(--light-contrast-bg);
     --contrast-fg: var(--light-contrast-fg);
+    --ta-bg: var(--light-ta-bg);
+    --ta-fg: var(--light-ta-fg);
+    --header-bg: var(--light-header-bg);
 }
 
 body.light-mode {
@@ -72,6 +81,9 @@ body.light-mode {
     --close3-fg: var(--light-close3-fg);
     --contrast-bg: var(--light-contrast-bg);
     --contrast-fg: var(--light-contrast-fg);
+    --ta-bg: var(--light-ta-bg);
+    --ta-fg: var(--light-ta-fg);
+    --header-bg: var(--light-header-bg);
 }
 
 body.dark-mode {
@@ -92,6 +104,9 @@ body.dark-mode {
     --close3-fg: var(--dark-close3-fg);
     --contrast-bg: var(--dark-contrast-bg);
     --contrast-fg: var(--dark-contrast-fg);
+    --ta-bg: var(--dark-ta-bg);
+    --ta-fg: var(--dark-ta-fg);
+    --header-bg: var(--dark-header-bg);
 }
 
 body {
@@ -100,7 +115,7 @@ body {
 }
 
 div.header, div.footer {
-    background-color: var(--primary-fg);
+    background-color: var(--header-bg);
     width: 100%;
     height: 3em;
     // align-content: center;
@@ -230,4 +245,12 @@ dialog::backdrop {
 
 .vert-button-list li button {
     width: calc(100% - 32px);
+}
+
+textarea {
+    background-color: var(--ta-bg);
+    color: var(--ta-fg);
+    border-width: 0.125em;
+    border-style: solid;
+    border-color: var(--ta-fg);
 }
