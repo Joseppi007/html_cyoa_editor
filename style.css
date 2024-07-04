@@ -29,12 +29,12 @@
     --dark-tertiary-bg: #4a5c6f;
     --dark-tertiary-fg: #d9c8ff;
     --dark-transparent: #123a;
-    --dark-close-bg: var(--light-close-bg);
-    --dark-close-fg: var(--light-close-fg);
-    --dark-close2-bg: var(--light-close2-bg);
-    --dark-close2-fg: var(--light-close2-fg);
-    --dark-close3-bg: var(--light-close3-bg);
-    --dark-close3-fg: var(--light-close3-fg);
+    --dark-close-bg: #733247;
+    --dark-close-fg: #ddaace;
+    --dark-close2-bg: #622531;
+    --dark-close2-fg: #e5afd4;
+    --dark-close3-bg: #502020;
+    --dark-close3-fg: #f0bce0;
     --dark-contrast-bg: #fff;
     --dark-contrast-fg: #000;
     --dark-ta-bg: #123;
