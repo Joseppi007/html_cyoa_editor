@@ -27,12 +27,23 @@ div.header, div.footer {
     background-color: var(--primary-fg);
     width: 100%;
     height: 3em;
-    align-content: center;
+    // align-content: center;
     text-align: center;
     position: absolute;
     left: 0em;
     padding: 0em;
     margin: 0em;
+    overflow-x: auto;
+    white-space:nowrap;
+}
+
+div.header > div, div.footer > div {
+    display: flex;
+}
+
+div.header > div::before, div.footer > div::before, div.header > div::after, div.footer > div::after {
+    content: "";
+    flex: auto;
 }
 
 div.header {
@@ -70,6 +81,10 @@ button:active {
 
 div.header button {
     width: 5em;
+}
+
+div.header button, div.footer button {
+    flex: 0 0 auto;
 }
 
 dialog {

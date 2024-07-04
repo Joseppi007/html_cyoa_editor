@@ -8,9 +8,11 @@
   </head>
   <body>
     <div class="header">
-      <button onclick="open_file_menu();">File</button>
-      <button onclick="story_edit();">Edit</button>
-      <button onclick="story_start();">Play</button>
+      <div>
+	<button onclick="open_file_menu();">File</button>
+	<button onclick="story_edit();">Edit</button>
+	<button onclick="story_start();">Play</button>
+      </div>
     </div>
     <dialog aria-modal="true" id="file_menu">
       <button class="close" onclick="file_menu.close();">&times;</button>
@@ -24,7 +26,9 @@
 	This is a placeholder.
       </div>
       <div id="story_footer" class="footer" style="font-size: 1.2em;">
-	<button>test</button><button>test</button>
+	<div>
+	  <button>test</button><button>test</button>
+	</div>
       </div>
     </dialog>
     <dialog aria-modal="true" id="page_list_modal" class="hidden-overflow">
@@ -54,9 +58,11 @@
     <dialog aria-modal="true" id="edit_modal" class="hidden-overflow">
       <button class="close" onclick="edit_modal.close();">&times;</button>
       <div id="edit_div" class="scroll-overflow" style="height: 100%;">
-	<h1><input id="page_name_input"/></h1>
-	<textarea id="page_text_input"></textarea><br/>
-	<textarea id="page_buttons_input"></textarea><br/>
+	<h1>Page Name: <input id="page_name_input" style="font-size:1em;"/></h1>
+	<p>Text on the Page:</p>
+	<textarea id="page_text_input" style="width:90%;height:50%;"></textarea>
+	<p>Option buttons, formatted as:<br/><span class="mono">Page Name:Option Text,Page Name:Option Text</span><br/>…or in other words, each option is seperated by a comma, and the options are divided into two pieces: The page it goes to and the text displayed for the option. These parts are seperated by a colon.</p>
+	<textarea id="page_buttons_input" style="width:90%;"></textarea></br>
 	<button onclick="save_edit();">Save Changes</button>
       </div>
     </dialog>
