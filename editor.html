@@ -66,5 +66,15 @@
 	<!--<button onclick="save_edit();">Save Changes</button>-->
       </div>
     </dialog>
+    <dialog aria-modal="true" id="title_edit_modal" class="hidden-overflow">
+      <button class="close" onclick="title_edit_modal.close();">&times;</button>
+      <div id="edit_div" class="scroll-overflow" style="height: 100%;">
+	<h1>Title: <input id="title_page_title_input" style="font-size:1em;" onchange="save_edit_title();"/></h1>
+	<p>Author: <input id="title_page_author_input" style="font-size:1em;" onchange="save_edit_title();"/></p>
+	<p>Description:</p>
+	<textarea id="title_page_description_input" style="width:90%;height:50%;" onchange="save_edit_title();"></textarea>
+	<!--<button onclick="save_edit_title();">Save Changes</button>-->
+      </div>
+    </dialog>
   </body>
 </html>

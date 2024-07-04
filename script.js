@@ -1,15 +1,10 @@
 let args = location.search.substr(1).split('&').map(e=>e.split('=')).reduce((a,b)=>{a[b[0]] = b[1]; return a;}, {}) ;
 let selected_page = "No page selected";
 
-story_data = {title:'Untitled',description:'This story does not have a description.',pages:[{name:'Hello World',text:'This is a placeholder.',next:[{name:'Welld Horlo',text:'==>'}],first:true},{name:'Welld Horlo',text:'phir is a tlaceholdes.',next:[{name:'Hello World',text:'==>'}],first:false}]};
+story_data = {title:'Untitled',description:'This story does not have a description.',author:'Joseppi007 (github) AKA Rose',pages:[{name:'Hello World',text:'This is a placeholder.',next:[{name:'Welld Horlo',text:'==>'}],first:true},{name:'Welld Horlo',text:'phir is a tlaceholdes.',next:[{name:'Hello World',text:'==>'}],first:false}]};
 
 function story_start() {
-    let firsts = story_data.pages.filter(page=>page.first);
-    if (firsts.length == 1) {
-	read_page(firsts[0].name);
-    } else {
-	alert("There was an issue finding the first page. Sorry.");
-    }
+    read_title_page();
 }
 
 function read_page(page_name) {
@@ -29,8 +24,49 @@ function read_page(page_name) {
     story_modal.showModal();
 }
 
+function read_title_page() {
+    let titleH1 = document.createElement('h1');
+    titleH1.innerText = story_data.title;
+    let authorH3 = document.createElement('h3');
+    authorH3.innerText = "By "+story_data.author;
+    let descP = document.createElement('p');
+    descP.innerText = story_data.description;
+    story_div.innerText = "";
+    story_div.appendChild(titleH1);
+    story_div.appendChild(authorH3);
+    story_div.appendChild(descP);
+    Array.from(story_footer.children).forEach(e=>e.remove());
+    let button = document.createElement('button');
+    button.innerText = "Begin";
+    let firsts = story_data.pages.filter(page=>page.first);
+    if (firsts.length != 1) {
+	alert("There was an issue finding the first page. Sorry.");
+	return;
+    }
+    let first = firsts[0].name;
+    button.onclick = ()=>{
+	read_page( first );
+    };
+    story_footer.appendChild(button);
+
+    close_modals();
+    story_modal.showModal();
+}
+
 function story_edit() {
     Array.from(page_list.children).forEach(e=>{e.remove();});
+    {
+	let li = document.createElement('li');
+	let button = document.createElement('button');
+	let em = document.createElement('em');
+	em.innerText = 'Title Page';
+	button.appendChild(em);
+	button.onclick = (event)=>{
+	    open_title_page_options_menu();
+	}
+	li.appendChild(button);
+	page_list.appendChild(li);
+    }
     story_data.pages.forEach(page=>{
 	let li = document.createElement('li');
 	let button = document.createElement('button');
@@ -61,6 +97,14 @@ function open_page_options_menu(page_name) {
     selected_page = page_name;
     close_modals();
     page_options_modal.showModal();
+}
+
+function open_title_page_options_menu() {
+    title_page_title_input.value = story_data.title;
+    title_page_author_input.value = story_data.author;
+    title_page_description_input.value = story_data.description;
+    close_modals();
+    title_edit_modal.showModal();
 }
 
 function make_first_page(page_name) {
@@ -134,6 +178,12 @@ function save_edit() {
 	return page;
     });
     selected_page = page_name_input.value;
+}
+
+function save_edit_title() {
+    story_data.title = title_page_title_input.value;
+    story_data.author = title_page_author_input.value;
+    story_data.description = title_page_description_input.value;
 }
 
 function open_file_menu() {
