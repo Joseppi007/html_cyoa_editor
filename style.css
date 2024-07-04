@@ -247,7 +247,7 @@ dialog::backdrop {
     width: calc(100% - 32px);
 }
 
-textarea {
+textarea, input {
     background-color: var(--ta-bg);
     color: var(--ta-fg);
     border-width: 0.125em;
