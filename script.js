@@ -79,8 +79,8 @@ function create_unnamed_page() {
 	create_page(name);
     } else {
 	for (let i = 2; true; i++) {
-	    if (!page_exists(name+i)) {
-		name += i;
+	    if (!page_exists(name+'('+i+')')) {
+		name += '('+i+')';
 		break;
 	    }
 	}
@@ -118,6 +118,14 @@ function close_modals() {
 }
 
 function save_edit() {
+    if (selected_page!=page_name_input.value && page_exists(page_name_input.value)) { // Name conflict
+	for (let i = 2; true; i++) {
+	    if (!page_exists(page_name_input.value+'('+i+')') || page_name_input.value+'('+i+')' == selected_page) {
+		page_name_input.value += '('+i+')';
+		break;
+	    }
+	}
+    }
     story_data.pages = story_data.pages.map(page=>{
 	if (page.name != selected_page) {return page;}
 	page.name = page_name_input.value;
@@ -125,6 +133,7 @@ function save_edit() {
 	page.next = page_buttons_input.value.split(',').filter(e=>e.length).map(e=>e.split(':')).map(e=>{return {name: e[0], text: e[1]};});
 	return page;
     });
+    selected_page = page_name_input.value;
 }
 
 function open_file_menu() {
