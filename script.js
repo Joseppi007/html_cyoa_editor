@@ -2,6 +2,7 @@ let args = location.search.substr(1).split('&').map(e=>e.split('=')).reduce((a,b
 let selected_page = "No page selected";
 
 story_data = {title:'Untitled',description:'This story does not have a description.',author:'Joseppi007 (github) AKA Rose',pages:[{name:'Hello World',text:'This is a placeholder.',next:[{name:'Welld Horlo',text:'==>'}],first:true},{name:'Welld Horlo',text:'phir is a tlaceholdes.',next:[{name:'Hello World',text:'==>'}],first:false}]};
+story_vars = {};
 
 function story_start() {
     read_title_page();
@@ -9,11 +10,11 @@ function story_start() {
 
 function read_page(page_name) {
     let page = get_page(page_name);
-    story_div.innerText = page.text;
+    populateWithText(story_div, page.text);
     Array.from(story_footer.children).forEach(e=>e.remove());
     page.next.forEach(btn=>{
 	let button = document.createElement('button');
-	button.innerText = btn.text;
+	populateWithText(button, btn.text);
 	button.onclick = ()=>{
 	    read_page(btn.name);
 	};
@@ -26,11 +27,11 @@ function read_page(page_name) {
 
 function read_title_page() {
     let titleH1 = document.createElement('h1');
-    titleH1.innerText = story_data.title;
+    populateWithText(titleH1, story_data.title);
     let authorH3 = document.createElement('h3');
-    authorH3.innerText = "By "+story_data.author;
+    populateWithText(authorH3, "By "+story_data.author);
     let descP = document.createElement('p');
-    descP.innerText = story_data.description;
+    populateWithText(descP, story_data.description);
     story_div.innerText = "";
     story_div.appendChild(titleH1);
     story_div.appendChild(authorH3);
@@ -53,6 +54,10 @@ function read_title_page() {
     story_modal.showModal();
 }
 
+function populateWithText(domElem, text) {
+    domElem.innerText = text;
+}
+
 function story_edit() {
     Array.from(page_list.children).forEach(e=>{e.remove();});
     {
@@ -70,7 +75,7 @@ function story_edit() {
     story_data.pages.forEach(page=>{
 	let li = document.createElement('li');
 	let button = document.createElement('button');
-	button.innerText = page.name;
+	populateWithText(button, page.name);
 	button.onclick = (event)=>{
 	    open_page_options_menu(page.name);
 	}
