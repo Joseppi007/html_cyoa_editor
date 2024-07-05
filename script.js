@@ -55,7 +55,108 @@ function read_title_page() {
 }
 
 function populateWithText(domElem, text) {
-    domElem.innerText = text;
+    domElem.innerText = "";
+    grabFormatText(text).forEach((piece)=>{
+	if (piece.type == "unformatted") {
+	    domElem.innerText += piece.text;
+	}
+	if (piece.type == "bold" || piece.type == "b" || piece.type == "strong") {
+	    let newElem = document.createElement("strong");
+	    newElem.innerText += piece.text;
+	    domElem.appendChild(newElem);
+	}
+	if (piece.type == "italics" || piece.type == "italic" || piece.type == "i" || piece.type == "it" || piece.type == "em") {
+	    let newElem = document.createElement("em");
+	    newElem.innerText += piece.text;
+	    domElem.appendChild(newElem);
+	}
+	if (piece.type == "underline" || piece.type == "uline" || piece.type == "under" || piece.type == "u") {
+	    let newElem = document.createElement("u");
+	    newElem.innerText += piece.text;
+	    domElem.appendChild(newElem);
+	}
+	if (piece.type == "h1") {
+	    let newElem = document.createElement("h1");
+	    newElem.innerText += piece.text;
+	    domElem.appendChild(newElem);
+	}
+	if (piece.type == "h2") {
+	    let newElem = document.createElement("h2");
+	    newElem.innerText += piece.text;
+	    domElem.appendChild(newElem);
+	}
+	if (piece.type == "h3") {
+	    let newElem = document.createElement("h3");
+	    newElem.innerText += piece.text;
+	    domElem.appendChild(newElem);
+	}
+	if (piece.type == "h4") {
+	    let newElem = document.createElement("h4");
+	    newElem.innerText += piece.text;
+	    domElem.appendChild(newElem);
+	}
+	if (piece.type == "h5") {
+	    let newElem = document.createElement("h5");
+	    newElem.innerText += piece.text;
+	    domElem.appendChild(newElem);
+	}
+	if (piece.type == "h6") {
+	    let newElem = document.createElement("h6");
+	    newElem.innerText += piece.text;
+	    domElem.appendChild(newElem);
+	}
+	if (piece.type == "hr" || piece.type == "horizontal rule" || piece.type == "line" || piece.type == "--") {
+	    let newElem = document.createElement("hr");
+	    domElem.appendChild(newElem);
+	}
+    });
+}
+
+/*
+ * Format Text is in the form "Hello, {get:name}!"
+ * Curly braces can be escaped with backslash.
+ * This function returns the example as [{type:"unformatted",text:"Hello, "},{type:"get",text:"name"},{type:"unformatted",text:"!"}].
+ */
+function grabFormatText(text) {
+    let accumulator = [];
+    let indexOfLastCharProcessed = -1;
+    while (true) {
+	let openBraceIndex = unescapedIndexOf(text, '{', indexOfLastCharProcessed+1);
+	if (openBraceIndex == -1) {
+	    if (indexOfLastCharProcessed != text.length - 1) {
+		accumulator.push({type:"unformatted",text:text.substr(indexOfLastCharProcessed+1)});
+	    }
+	    return accumulator;
+	}
+	let closeBraceIndex = unescapedIndexOf(text, '}', openBraceIndex+1);
+	if (closeBraceIndex == -1) {
+	    if (indexOfLastCharProcessed != text.length - 1) {
+		accumulator.push({type:"unformatted",text:text.substr(indexOfLastCharProcessed+1)});
+	    }
+	    return accumulator;
+	}
+	let colonIndex = unescapedIndexOf(text, ':', openBraceIndex);
+	if (openBraceIndex != indexOfLastCharProcessed + 1) {
+	    accumulator.push({type:"unformatted",text:text.substr(indexOfLastCharProcessed+1, openBraceIndex-indexOfLastCharProcessed-1)});
+	    indexOfLastCharProcessed = openBraceIndex - 1;
+	}
+	if (colonIndex == -1 || colonIndex > closeBraceIndex) {
+	    accumulator.push({type:text.substr(openBraceIndex+1, closeBraceIndex-openBraceIndex-1), text:""});
+	} else {
+	    accumulator.push({type:text.substr(openBraceIndex+1, colonIndex-openBraceIndex-1), text:text.substr(colonIndex+1, closeBraceIndex-colonIndex-1)});
+	}
+	indexOfLastCharProcessed = closeBraceIndex;
+    }
+    return accumulator;
+}
+
+function unescapedIndexOf(source, search, startIndex) {
+    let index = startIndex;
+    while (source[index-1] == '\\' || source.substr(index, search.length) != search) {
+	index = source.indexOf(search, index+1);
+	if (index == -1) {return -1;}
+    }
+    return index;
 }
 
 function story_edit() {
