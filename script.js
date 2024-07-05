@@ -8,108 +8,190 @@ function story_start() {
     read_title_page();
 }
 
-function read_page(page_name) {
+async function read_page(page_name, part = 0) {
     let page = get_page(page_name);
-    populateWithText(story_div, page.text);
-    Array.from(story_footer.children).forEach(e=>e.remove());
-    page.next.forEach(btn=>{
-	let button = document.createElement('button');
-	populateWithText(button, btn.text);
-	button.onclick = ()=>{
-	    read_page(btn.name);
-	};
-	story_footer.appendChild(button);
-    });
+    let d = document.createElement('div');
+    story_div.innerText = "";
+    story_div.appendChild(d);
+    story_footer.innerText = "";
 
     close_modals();
     story_modal.showModal();
+    
+    await populateWithText(d, page.text, part);
+    Array.from(story_footer.children).forEach(e=>e.remove());
+    if (part == grabFormatTextPartCount(page.text) - 1) {
+	for (let i = 0; i < page.next.length; i++) {
+	    let btn = page.next[i];
+	    let button = document.createElement('button');
+	    await populateWithText(button, btn.text);
+	    button.onclick = ()=>{
+		read_page(btn.name);
+	    };
+	    story_footer.appendChild(button);
+	};
+    } else {
+	let button = document.createElement('button');
+	button.innerText = '→';
+	button.onclick = ()=>{
+	    read_page(page_name, part+1);
+	};
+	story_footer.appendChild(button);
+    }
 }
 
-function read_title_page() {
+async function read_title_page(part = 0) {
+    story_div.innerText = "";
+    story_footer.innerText = "";
+    
     let titleH1 = document.createElement('h1');
-    populateWithText(titleH1, story_data.title);
     let authorH3 = document.createElement('h3');
-    populateWithText(authorH3, "By "+story_data.author);
     let descP = document.createElement('p');
-    populateWithText(descP, story_data.description);
+    story_div.appendChild(titleH1);
+    story_div.appendChild(authorH3);
+    story_div.appendChild(descP);
+    
+    close_modals();
+    story_modal.showModal();
+    
+    await populateWithText(titleH1, story_data.title);
+    await populateWithText(authorH3, "By "+story_data.author);
+    await populateWithText(descP, story_data.description);
     story_div.innerText = "";
     story_div.appendChild(titleH1);
     story_div.appendChild(authorH3);
     story_div.appendChild(descP);
     Array.from(story_footer.children).forEach(e=>e.remove());
-    let button = document.createElement('button');
-    button.innerText = "Begin";
     let firsts = story_data.pages.filter(page=>page.first);
     if (firsts.length != 1) {
 	alert("There was an issue finding the first page. Sorry.");
 	return;
     }
     let first = firsts[0].name;
-    button.onclick = ()=>{
-	read_page( first );
-    };
-    story_footer.appendChild(button);
+    if (part == grabFormatTextPartCount(story_data.description) - 1) {
+	let button = document.createElement('button');
+	button.innerText = "Begin";
+	button.onclick = ()=>{
+	    read_page( first );
+	};
+	story_footer.appendChild(button);
+    } else {
+	let button = document.createElement('button');
+	button.innerText = "→";
+	button.onclick = ()=>{
+	    read_title_page(part+1);
+	};
+	story_footer.appendChild(button);
+    }
 
     close_modals();
     story_modal.showModal();
 }
 
-function populateWithText(domElem, text) {
+async function populateWithText(domElem, text, part = 0, delay = 10) {
     domElem.innerText = "";
-    grabFormatText(text).forEach((piece)=>{
+    let ft = grabFormatTextPart(text, part);
+    for (let i = 0; i < ft.length; i++) {
+	piece = ft[i];
 	if (piece.type == "unformatted") {
-	    domElem.innerText += piece.text;
+	    let newElem = document.createTextNode("");
+	    domElem.appendChild(newElem);
+	    await populateWithPlainText(newElem, piece.text, delay);
 	}
 	if (piece.type == "bold" || piece.type == "b" || piece.type == "strong") {
 	    let newElem = document.createElement("strong");
-	    newElem.innerText += piece.text;
 	    domElem.appendChild(newElem);
+	    await populateWithPlainText(newElem, piece.text, delay);
 	}
 	if (piece.type == "italics" || piece.type == "italic" || piece.type == "i" || piece.type == "it" || piece.type == "em") {
 	    let newElem = document.createElement("em");
-	    newElem.innerText += piece.text;
 	    domElem.appendChild(newElem);
+	    await populateWithPlainText(newElem, piece.text, delay);
 	}
 	if (piece.type == "underline" || piece.type == "uline" || piece.type == "under" || piece.type == "u") {
 	    let newElem = document.createElement("u");
-	    newElem.innerText += piece.text;
 	    domElem.appendChild(newElem);
+	    await populateWithPlainText(newElem, piece.text, delay);
 	}
 	if (piece.type == "h1") {
 	    let newElem = document.createElement("h1");
-	    newElem.innerText += piece.text;
 	    domElem.appendChild(newElem);
+	    await populateWithPlainText(newElem, piece.text, delay);
 	}
 	if (piece.type == "h2") {
 	    let newElem = document.createElement("h2");
-	    newElem.innerText += piece.text;
 	    domElem.appendChild(newElem);
+	    await populateWithPlainText(newElem, piece.text, delay);
 	}
 	if (piece.type == "h3") {
 	    let newElem = document.createElement("h3");
-	    newElem.innerText += piece.text;
 	    domElem.appendChild(newElem);
+	    await populateWithPlainText(newElem, piece.text, delay);
 	}
 	if (piece.type == "h4") {
 	    let newElem = document.createElement("h4");
-	    newElem.innerText += piece.text;
 	    domElem.appendChild(newElem);
+	    await populateWithPlainText(newElem, piece.text, delay);
 	}
 	if (piece.type == "h5") {
 	    let newElem = document.createElement("h5");
-	    newElem.innerText += piece.text;
 	    domElem.appendChild(newElem);
+	    await populateWithPlainText(newElem, piece.text, delay);
 	}
 	if (piece.type == "h6") {
 	    let newElem = document.createElement("h6");
-	    newElem.innerText += piece.text;
 	    domElem.appendChild(newElem);
+	    await populateWithPlainText(newElem, piece.text, delay);
 	}
 	if (piece.type == "hr" || piece.type == "horizontal rule" || piece.type == "line" || piece.type == "--") {
 	    let newElem = document.createElement("hr");
 	    domElem.appendChild(newElem);
 	}
+	if (piece.type == "br" || piece.type == "break") {
+	    // Shouldn't show up, actually…
+	}
+    }
+}
+
+async function populateWithPlainText(domElem, text, delay) {
+    for (let i = 0; i < text.length; i++) {
+	let letter = text[i];
+	if (domElem.innerText == undefined) {
+	    domElem.data += letter;
+	} else {
+	    domElem.innerText += letter;
+	}
+	await sleep(delay);
+    };
+}
+
+// Breaks on {type:"break",text:""}
+function grabFormatTextPart(text, partToGet) {
+    let ft = grabFormatText(text);
+    let acc = [];
+    let currentPart = 0;
+    ft.forEach((part)=>{
+	if (part.type == 'br' || part.type == 'break') {
+	    currentPart++;
+	} else {
+	    if (currentPart == partToGet) {
+		acc.push(part);
+	    }
+	}
     });
+    return acc;
+}
+
+// Breaks on {type:"break",text:""}
+function grabFormatTextPartCount(text) {
+    let ft = grabFormatText(text);
+    let currentPart = 0;
+    ft.forEach((part)=>{
+	if (part.type == 'br' || part.type == 'break') {
+	    currentPart++;
+	}
+    });
+    return currentPart+1;
 }
 
 /*
@@ -309,4 +391,8 @@ function figure_out_theme() {
     }
     if (args.theme == 'l' || args.theme == 'light' || args.theme == 'light mode') { document.body.classList += ' light-mode'; }
     if (args.theme == 'd' || args.theme == 'dark' || args.theme == 'dark mode') { document.body.classList += ' dark-mode'; }
+}
+
+async function sleep(n) {
+    await new Promise(resolve => setTimeout(resolve, n));
 }
