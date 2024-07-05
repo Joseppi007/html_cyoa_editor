@@ -20,7 +20,7 @@
       <p>Save your story to a <span class="mono">.JSON</span> file or load a <span class="mono">.JSON</span> file.<br/>I thought about having a whole file manipulation piece of code, but then I remembered you can probably just copy/paste from the below textarea.</p>
       <textarea id="story_data_json" onchange="story_data=JSON.parse(this.value);" style="width:90%;height:50%;"></textarea>
     </dialog>
-    <dialog aria-modal="true" id="story_modal" class="hidden-overflow">
+    <dialog aria-modal="true" id="story_modal" class="hidden-overflow" onmousedown="baseDelay=0;" onmouseup="baseDelay=10;">
       <button class="close" onclick="story_modal.close();">&times;</button>
       <div id="story_div" class="scroll-overflow" style="height: calc(100% - 3em); width: calc(100% - 2em);">
 	This is a placeholder.

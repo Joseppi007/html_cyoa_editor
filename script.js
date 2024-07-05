@@ -1,8 +1,9 @@
 let args = location.search.substr(1).split('&').map(e=>e.split('=')).reduce((a,b)=>{a[b[0]] = b[1]; return a;}, {}) ;
 let selected_page = "No page selected";
 
-story_data = {title:'Untitled',description:'This story does not have a description.',author:'Joseppi007 (github) AKA Rose',pages:[{name:'Hello World',text:'This is a placeholder.',next:[{name:'Welld Horlo',text:'==>'}],first:true},{name:'Welld Horlo',text:'phir is a tlaceholdes.',next:[{name:'Hello World',text:'==>'}],first:false}]};
-story_vars = {};
+let story_data = {title:'Untitled',description:'This story does not have a description.',author:'Joseppi007 (github) AKA Rose',pages:[{name:'Hello World',text:'This is a placeholder.',next:[{name:'Welld Horlo',text:'==>'}],first:true},{name:'Welld Horlo',text:'phir is a tlaceholdes.',next:[{name:'Hello World',text:'==>'}],first:false}]};
+let story_vars = {};
+let baseDelay = 10;
 
 function story_start() {
     read_title_page();
@@ -88,7 +89,7 @@ async function read_title_page(part = 0) {
     story_modal.showModal();
 }
 
-async function populateWithText(domElem, text, part = 0, delay = 10) {
+async function populateWithText(domElem, text, part = 0, delayMultiplier = 1) {
     domElem.innerText = "";
     let ft = grabFormatTextPart(text, part);
     for (let i = 0; i < ft.length; i++) {
@@ -96,55 +97,65 @@ async function populateWithText(domElem, text, part = 0, delay = 10) {
 	if (piece.type == "unformatted") {
 	    let newElem = document.createTextNode("");
 	    domElem.appendChild(newElem);
-	    await populateWithPlainText(newElem, piece.text, delay);
+	    await populateWithPlainText(newElem, piece.text, delayMultiplier);
 	}
 	if (piece.type == "bold" || piece.type == "b" || piece.type == "strong") {
 	    let newElem = document.createElement("strong");
 	    domElem.appendChild(newElem);
-	    await populateWithPlainText(newElem, piece.text, delay);
+	    await populateWithPlainText(newElem, piece.text, delayMultiplier);
 	}
 	if (piece.type == "italics" || piece.type == "italic" || piece.type == "i" || piece.type == "it" || piece.type == "em") {
 	    let newElem = document.createElement("em");
 	    domElem.appendChild(newElem);
-	    await populateWithPlainText(newElem, piece.text, delay);
+	    await populateWithPlainText(newElem, piece.text, delayMultiplier);
 	}
 	if (piece.type == "underline" || piece.type == "uline" || piece.type == "under" || piece.type == "u") {
 	    let newElem = document.createElement("u");
 	    domElem.appendChild(newElem);
-	    await populateWithPlainText(newElem, piece.text, delay);
+	    await populateWithPlainText(newElem, piece.text, delayMultiplier);
 	}
 	if (piece.type == "h1") {
 	    let newElem = document.createElement("h1");
 	    domElem.appendChild(newElem);
-	    await populateWithPlainText(newElem, piece.text, delay);
+	    await populateWithPlainText(newElem, piece.text, delayMultiplier);
 	}
 	if (piece.type == "h2") {
 	    let newElem = document.createElement("h2");
 	    domElem.appendChild(newElem);
-	    await populateWithPlainText(newElem, piece.text, delay);
+	    await populateWithPlainText(newElem, piece.text, delayMultiplier);
 	}
 	if (piece.type == "h3") {
 	    let newElem = document.createElement("h3");
 	    domElem.appendChild(newElem);
-	    await populateWithPlainText(newElem, piece.text, delay);
+	    await populateWithPlainText(newElem, piece.text, delayMultiplier);
 	}
 	if (piece.type == "h4") {
 	    let newElem = document.createElement("h4");
 	    domElem.appendChild(newElem);
-	    await populateWithPlainText(newElem, piece.text, delay);
+	    await populateWithPlainText(newElem, piece.text, delayMultiplier);
 	}
 	if (piece.type == "h5") {
 	    let newElem = document.createElement("h5");
 	    domElem.appendChild(newElem);
-	    await populateWithPlainText(newElem, piece.text, delay);
+	    await populateWithPlainText(newElem, piece.text, delayMultiplier);
 	}
 	if (piece.type == "h6") {
 	    let newElem = document.createElement("h6");
 	    domElem.appendChild(newElem);
-	    await populateWithPlainText(newElem, piece.text, delay);
+	    await populateWithPlainText(newElem, piece.text, delayMultiplier);
+	}
+	if (piece.type.match(/typeRate\(\d*.?\d*\)/)) {
+	    let delayMultiplier1 = Number(piece.type.substr(9, piece.type.length-10));
+	    let newElem = document.createTextNode("");
+	    domElem.appendChild(newElem);
+	    await populateWithPlainText(newElem, piece.text, delayMultiplier*delayMultiplier1);
 	}
 	if (piece.type == "hr" || piece.type == "horizontal rule" || piece.type == "line" || piece.type == "--") {
 	    let newElem = document.createElement("hr");
+	    domElem.appendChild(newElem);
+	}
+	if (piece.type == "newLine") {
+	    let newElem = document.createElement("br");
 	    domElem.appendChild(newElem);
 	}
 	if (piece.type == "br" || piece.type == "break") {
@@ -153,7 +164,7 @@ async function populateWithText(domElem, text, part = 0, delay = 10) {
     }
 }
 
-async function populateWithPlainText(domElem, text, delay) {
+async function populateWithPlainText(domElem, text, delaydelayMultiplier) {
     for (let i = 0; i < text.length; i++) {
 	let letter = text[i];
 	if (domElem.innerText == undefined) {
@@ -161,7 +172,7 @@ async function populateWithPlainText(domElem, text, delay) {
 	} else {
 	    domElem.innerText += letter;
 	}
-	await sleep(delay);
+	await sleep(delaydelayMultiplier*baseDelay);
     };
 }
 
@@ -200,6 +211,7 @@ function grabFormatTextPartCount(text) {
  * This function returns the example as [{type:"unformatted",text:"Hello, "},{type:"get",text:"name"},{type:"unformatted",text:"!"}].
  */
 function grabFormatText(text) {
+    text = text.replace(/\n/g, "{newLine}");
     let accumulator = [];
     let indexOfLastCharProcessed = -1;
     while (true) {
@@ -258,7 +270,7 @@ function story_edit() {
     story_data.pages.forEach(page=>{
 	let li = document.createElement('li');
 	let button = document.createElement('button');
-	populateWithText(button, page.name);
+	populateWithText(button, page.name, 0, 0);
 	button.onclick = (event)=>{
 	    open_page_options_menu(page.name);
 	}
@@ -394,5 +406,6 @@ function figure_out_theme() {
 }
 
 async function sleep(n) {
+    if (n==0) return;
     await new Promise(resolve => setTimeout(resolve, n));
 }
