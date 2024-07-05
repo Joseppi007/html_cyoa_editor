@@ -270,7 +270,7 @@ function story_edit() {
     story_data.pages.forEach(page=>{
 	let li = document.createElement('li');
 	let button = document.createElement('button');
-	populateWithText(button, page.name, 0, 0);
+	button.innerText = page.name;
 	button.onclick = (event)=>{
 	    open_page_options_menu(page.name);
 	}
