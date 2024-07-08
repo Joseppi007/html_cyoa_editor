@@ -2,7 +2,7 @@ let args = location.search.substr(1).split('&').map(e=>e.split('=')).reduce((a,b
 let selected_page = "No page selected";
 
 let story_data = {title:'Untitled',description:'This story does not have a description.',author:'Joseppi007 (github) AKA Rose',pages:[{name:'Hello World',text:'{scene:https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.worldatlas.com%2Fr%2Fw1200%2Fupload%2F04%2Fab%2Fd1%2Ffish-species-tropical.jpg&f=1&nofb=1&ipt=59de0569334d2bfa49fb446d27052056d28a3c3f0431ca4f168a214a0871cde4&ipo=images}\n{scene_character(-1,1,A):https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.xXVVpcottGRlEH9vDdLPPwHaHM%26pid%3DApi&f=1&ipt=605c47c138d3b963699bdb363b7c0ed8ec01ff32894fa1658c47fbe94bed4c1a&ipo=images}\n{scene_character(0,0.75,B):https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.xXVVpcottGRlEH9vDdLPPwHaHM%26pid%3DApi&f=1&ipt=605c47c138d3b963699bdb363b7c0ed8ec01ff32894fa1658c47fbe94bed4c1a&ipo=images}\n{scene_character(1,0.5,C):https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.xXVVpcottGRlEH9vDdLPPwHaHM%26pid%3DApi&f=1&ipt=605c47c138d3b963699bdb363b7c0ed8ec01ff32894fa1658c47fbe94bed4c1a&ipo=images}\nThis is a placeholder.\n{b:{u:{i:Nested Formatting Test}}}\nType something here: {set:example}\n{br}\nBreak test as well.\n{get:example}',next:[{name:'Welld Horlo',text:'==>'}],first:true},{name:'Welld Horlo',text:'phir is a tlaceholdes.',next:[{name:'Hello World',text:'==>'}],first:false}]};
-let special_story_data = {help:{title:'The Guide',description:'This is a guide to help users in the creation of stories using this tool.',author:'Joseppi007 (github) AKA Rose',pages:[{name:'Start',text:'This is currently quite empty.',next:[],first:true}]}}
+let special_story_data = {help:{title:'The Guide',description:'This is a guide to help users in the creation of stories using this tool.',author:'Joseppi007 (github) AKA Rose',pages:[{name:'Start',text:'Seeing as this is a textual medium, I have decided to document this tool with itself.\nClick on a button below for what section of the guide you wish to read.\n{typeRate(0.5):Please note that clicking while the type effect is playing will speed it up greatly.}',next:[{name:'Reader Guide',text:'How do I read somebody\'s story?'}, {name:'GUI',text:'Where to go?'}, {name:'Formatting',text:'How to format?'}, {name:'Sharing',text:'How to share?'}],first:true},{name:'Reader Guide',text:'{h1:How to read a story.}\nTo read a story somebody wrote, you must first copy their JSON data. This could either be stored inside a JSON file or sent to you as a strange looking mess of brackets, colons and quotes with text all over the place. Once you have the text in your clipboard, click on the {b:File} button in the header of the web page, then replace all of the JSON text present in the large rectangle with what you have in your clipboard.\nClose the Pop-Up, then press {b:Play} in the header.\nThis may be made easier in the future, as I understand this is a lot more work than most would want.',next:[{name:'Start',text:'{i:Back}'}],first:false},{name:'GUI',text:'{h1:Where things are.}\nIf you wish to load a story you or somebody else has saved earlier or save the story you currently have, go to the {b:File} menu by clicking the button in the header. The esoteric text in the text box you will be presented with is the story, and saving this text somewhere will save the story. Copy/pasting it into that text box later will load the story back. Note that you {b:must} save the story you are working on in this way before closing the tab, as your story will be lost if the page is ever unloaded.\n\nIf you wish to read the story you have loaded, then select the {b:Play} button in the header.\nThe {b:Edit} menu can also be used if you wish to start from a page that is not the title page. Simply select the page from the list that appears, then select {i:Read From Here}.\n\nIf you wish to edit the story, click on the {b:Edit} button in the header. You should start with the {i:Title Page} to put yourself as the author and alike, but you do not need to if you prefer it that way. There will probably be some pages already present; you can click on them and select {i:Delete This Page} to remove them if you wish, otherwise you could simply edit the pages. The bottom of the page editor for each page will have a place to say which page(s) come next; the endings will have no next pages. Ensure that you select which page is your first page before you or anybody else reads it!',next:[{name:'Start',text:'{i:Back}'}],first:false},{name:'Formatting',text:'{h1:Formatting}{h3:From Bold and Italics to Graphics.}{hr}\nSuppose you wish to make some text {b:bold}. You can do this by writing \\{bold:{bold:Your Text Here}\\}. The formatting consists of curly braces on the left and right, a colon to seperate the type of formatting and the text to be formatted, and said type and text.\n\n\\{bold:example\\} → {bold:example}',next:[{name:'Start',text:'{i:Back}'}],first:false},{name:'Sharing',text:'',next:[{name:'Start',text:'{i:Back}'}],first:false}]}}
 let story_vars = {};
 let baseDelay = 10;
 
@@ -371,14 +371,14 @@ function grabFormatText(text) {
 	    if (indexOfLastCharProcessed != text.length - 1) {
 		accumulator.push(text.substr(indexOfLastCharProcessed+1));
 	    }
-	    return accumulator;
+	    break;
 	}
 	let closeBraceIndex = unescapedMatchingIndexOf(text, '}', ['{', '}'], openBraceIndex);
 	if (closeBraceIndex == -1) {
 	    if (indexOfLastCharProcessed != text.length - 1) {
 		accumulator.push(text.substr(indexOfLastCharProcessed+1));
 	    }
-	    return accumulator;
+	    break;
 	}
 	let colonIndex = unescapedIndexOf(text, ':', openBraceIndex);
 	if (openBraceIndex != indexOfLastCharProcessed + 1) {
@@ -392,6 +392,12 @@ function grabFormatText(text) {
 	}
 	indexOfLastCharProcessed = closeBraceIndex;
     }
+    accumulator = accumulator.map(e=>{
+	if (typeof(e) == 'string') {
+	    return e.replace(/\\\{/g, '{').replace(/\\\}/g, '}').replace(/\\\\/g, '\\');
+	}
+	return e;
+    });
     return accumulator;
 }
 

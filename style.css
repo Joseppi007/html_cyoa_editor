@@ -254,3 +254,7 @@ textarea, input {
     border-style: solid;
     border-color: var(--ta-fg);
 }
+
+hr {
+    color: var(--main-fg);
+}
