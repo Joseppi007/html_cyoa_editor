@@ -1,7 +1,7 @@
 let args = location.search.substr(1).split('&').map(e=>e.split('=')).reduce((a,b)=>{a[b[0]] = b[1]; return a;}, {}) ;
 let selected_page = "No page selected";
 
-let story_data = {title:'Untitled',description:'This story does not have a description.',author:'Joseppi007 (github) AKA Rose',pages:[{name:'Hello World',text:'{scene:https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.worldatlas.com%2Fr%2Fw1200%2Fupload%2F04%2Fab%2Fd1%2Ffish-species-tropical.jpg&f=1&nofb=1&ipt=59de0569334d2bfa49fb446d27052056d28a3c3f0431ca4f168a214a0871cde4&ipo=images}\n{scene_character(-1,1):https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.worldatlas.com%2Fr%2Fw1200%2Fupload%2F04%2Fab%2Fd1%2Ffish-species-tropical.jpg&f=1&nofb=1&ipt=59de0569334d2bfa49fb446d27052056d28a3c3f0431ca4f168a214a0871cde4&ipo=images}\n{scene_character(0,0.5):https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.worldatlas.com%2Fr%2Fw1200%2Fupload%2F04%2Fab%2Fd1%2Ffish-species-tropical.jpg&f=1&nofb=1&ipt=59de0569334d2bfa49fb446d27052056d28a3c3f0431ca4f168a214a0871cde4&ipo=images}\n{scene_character(1,0.1):https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.worldatlas.com%2Fr%2Fw1200%2Fupload%2F04%2Fab%2Fd1%2Ffish-species-tropical.jpg&f=1&nofb=1&ipt=59de0569334d2bfa49fb446d27052056d28a3c3f0431ca4f168a214a0871cde4&ipo=images}\nThis is a placeholder.\n{b:{u:{i:Nested Formatting Test}}}\nType something here: {set:example}\n{br}\nBreak test as well.\n{get:example}',next:[{name:'Welld Horlo',text:'==>'}],first:true},{name:'Welld Horlo',text:'phir is a tlaceholdes.',next:[{name:'Hello World',text:'==>'}],first:false}]};
+let story_data = {title:'Untitled',description:'This story does not have a description.',author:'Joseppi007 (github) AKA Rose',pages:[{name:'Hello World',text:'{scene:https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.worldatlas.com%2Fr%2Fw1200%2Fupload%2F04%2Fab%2Fd1%2Ffish-species-tropical.jpg&f=1&nofb=1&ipt=59de0569334d2bfa49fb446d27052056d28a3c3f0431ca4f168a214a0871cde4&ipo=images}\n{scene_character(-1,1,A):https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.xXVVpcottGRlEH9vDdLPPwHaHM%26pid%3DApi&f=1&ipt=605c47c138d3b963699bdb363b7c0ed8ec01ff32894fa1658c47fbe94bed4c1a&ipo=images}\n{scene_character(0,0.75,B):https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.xXVVpcottGRlEH9vDdLPPwHaHM%26pid%3DApi&f=1&ipt=605c47c138d3b963699bdb363b7c0ed8ec01ff32894fa1658c47fbe94bed4c1a&ipo=images}\n{scene_character(1,0.5,C):https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.xXVVpcottGRlEH9vDdLPPwHaHM%26pid%3DApi&f=1&ipt=605c47c138d3b963699bdb363b7c0ed8ec01ff32894fa1658c47fbe94bed4c1a&ipo=images}\nThis is a placeholder.\n{b:{u:{i:Nested Formatting Test}}}\nType something here: {set:example}\n{br}\nBreak test as well.\n{get:example}',next:[{name:'Welld Horlo',text:'==>'}],first:true},{name:'Welld Horlo',text:'phir is a tlaceholdes.',next:[{name:'Hello World',text:'==>'}],first:false}]};
 let special_story_data = {help:{title:'The Guide',description:'This is a guide to help users in the creation of stories using this tool.',author:'Joseppi007 (github) AKA Rose',pages:[{name:'Start',text:'This is currently quite empty.',next:[],first:true}]}}
 let story_vars = {};
 let baseDelay = 10;
@@ -10,7 +10,7 @@ function story_start(used_story_data = story_data) {
     read_title_page(0, used_story_data);
 }
 
-async function read_page(page_name, part = 0, used_story_data = story_data) {
+async function read_page(page_name, part = 0, used_story_data = story_data, preserve = []) {
     let page = get_page(page_name, used_story_data);
     let d = document.createElement('div');
     story_div.innerText = "";
@@ -20,7 +20,7 @@ async function read_page(page_name, part = 0, used_story_data = story_data) {
     close_modals();
     story_modal.showModal();
     
-    await populateWithText(d, page.text, part);
+    let newPreserve = await populateWithText(d, page.text, part, preserve, 1);
     Array.from(story_footer.children).forEach(e=>e.remove());
     if (part == grabFormatTextPartCount(page.text) - 1) {
 	for (let i = 0; i < page.next.length; i++) {
@@ -28,7 +28,7 @@ async function read_page(page_name, part = 0, used_story_data = story_data) {
 	    let button = document.createElement('button');
 	    await populateWithText(button, btn.text);
 	    button.onclick = ()=>{
-		read_page(btn.name);
+		read_page(btn.name, 0, used_story_data, []);
 	    };
 	    story_footer.appendChild(button);
 	};
@@ -36,7 +36,7 @@ async function read_page(page_name, part = 0, used_story_data = story_data) {
 	let button = document.createElement('button');
 	button.innerText = '→';
 	button.onclick = ()=>{
-	    read_page(page_name, part+1);
+	    read_page(page_name, part+1, used_story_data, newPreserve);
 	};
 	story_footer.appendChild(button);
     }
@@ -90,12 +90,13 @@ async function read_title_page(part = 0, used_story_data = story_data) {
     story_modal.showModal();
 }
 
-function populateWithText(domElem, text, part = 0, delayMultiplier = 1) {
-    return populateWithText_(domElem, removeTrailingWhitespace(grabFormatTextPart(text, part)), delayMultiplier);
+function populateWithText(domElem, text, part = 0, preservedFormatProcessedText = [], delayMultiplier = 1) {
+    return populateWithText_(domElem, preservedFormatProcessedText.concat(removeTrailingWhitespace(grabFormatTextPart(text, part))), delayMultiplier, preservedFormatProcessedText);
 }
 
-async function populateWithText_(domElem, formatProcessedText, delayMultiplier = 1) {
+async function populateWithText_(domElem, formatProcessedText, delayMultiplier = 1, preservedFormatProcessedText = []) {
     domElem.innerText = "";
+    let preserveAccumulator = preservedFormatProcessedText;
     for (let i = 0; i < formatProcessedText.length; i++) {
 	let piece = formatProcessedText[i];
 	if (typeof(piece) == "string") {
@@ -191,28 +192,70 @@ async function populateWithText_(domElem, formatProcessedText, delayMultiplier =
 	    continue;
 	}
 	if (piece.type == "scene" || piece.type == "scene_background" || piece.type == "scene_bg") {
+	    if (document.getElementById("scene_div")) {
+		document.getElementById("scene_div").style = "aspect-ratio: 16 / 9; height:100%; margin: auto; background-image: url("+piece.kids[0]+"); overflow: hidden; background-repeat: no-repeat; background-size: 100% 100%; position: relative;";
+		preserveAccumulator = preserveAccumulator.filter(e=>{
+		    if (typeof(e) == 'string') {return true;}
+		    return !(e.type == "scene" || e.type == "scene_background" || e.type == "scene_bg");
+		});
+		preserveAccumulator.push(piece);
+		continue;
+	    }
 	    let newElem = document.createElement("div");
 	    newElem.style = "width: 100%; height: 65vh; background-color: var(--primary-bg); overflow: hidden;";
-	    domElem.appendChild(newElem);
+	    newElem.id = "scene_div_div";
+	    domElem.prepend(newElem);
 	    let newElem1 = document.createElement("div");
 	    newElem1.style = "aspect-ratio: 16 / 9; height:100%; margin: auto; background-image: url("+piece.kids[0]+"); overflow: hidden; background-repeat: no-repeat; background-size: 100% 100%; position: relative;";
 	    newElem1.id = "scene_div";
 	    newElem.appendChild(newElem1);
+	    preserveAccumulator.push(piece);
 	    continue;
 	}
-	if (piece.type.match(/scene_character\(\d*.?\d*\, ?\d*.?\d*\)/)) {
-	    let x = piece.type.substring(16, piece.type.indexOf(','));
+	let match = piece.type.match(/scene_character\((\d*.?\d*)\, ?(\d*.?\d*)\, ?([^,]*)\)/);
+	if (match) {
+	    let x = match[1];
 	    x = Number(x);
 	    x = ( x + 1 ) / 2;
-	    let y = piece.type.substr(piece.type.indexOf(',')+1+((piece.type.indexOf(" ")==-1)?0:1));
-	    y = Number(y.substr(0, y.length-1));
+	    let y = match[2];
+	    y = Number(y);
 	    y = 1 - y;
+	    let name = match[3];
+	    if (document.getElementById("scene_character_"+match[1])) {
+		document.getElementById("scene_character_"+match[1]).style = "aspect-ratio: 9 / 16; height: 100%; background-image: url("+piece.kids[0]+"); position: absolute; left: "+(68.359375*x)+"%; top: "+(100*y)+"%; background-repeat: no-repeat; background-size: 100% 100%;";
+		preserveAccumulator = preserveAccumulator.filter(e=>{
+		    if (typeof(e) == 'string') {return true;}
+		    return !(piece.type.match(new RegExp("scene_character\((\d*.?\d*)\, ?(\d*.?\d*)\, ?("+name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')+")\)")));
+		});
+		preserveAccumulator.push(piece);
+		continue;
+	    }
 	    let newElem = document.createElement("div");
 	    newElem.style = "aspect-ratio: 9 / 16; height: 100%; background-image: url("+piece.kids[0]+"); position: absolute; left: "+(68.359375*x)+"%; top: "+(100*y)+"%; background-repeat: no-repeat; background-size: 100% 100%;";
+	    newElem.id = "scene_character_"+name;
 	    document.getElementById("scene_div").appendChild(newElem);
+	    preserveAccumulator.push(piece);
+	    continue;
+	}
+	if (piece.type == "scene_remove" || piece.type == "scene_delete" || piece.type == "scene_del" || piece.type == "scene_rm") {
+	    if (document.getElementById("scene_div_div")) {
+		document.getElementById("scene_div_div").remove();
+	    }
+	    continue;
+	}
+	match = piece.type.match(/scene_(?:remove|delete|rm|del)_character\(([^,]*)\)/);
+	if (match) {
+	    if (document.getElementById("scene_character_"+match[1])) {
+		document.getElementById("scene_character_"+match[1]).remove();
+	    }
+	    preserveAccumulator = preserveAccumulator.filter(e=>{
+		if (typeof(e) == 'string') {return true;}
+		return !(piece.type.match(new RegExp("scene_character\((\d*.?\d*)\, ?(\d*.?\d*)\, ?("+match[1].replace(/[.*+?^${}()|[\]\\]/g, '\\$&')+")\)")));
+	    });
 	    continue;
 	}
     }
+    return preserveAccumulator;
 }
 
 async function populateWithPlainText(domElem, text, delaydelayMultiplier) {
