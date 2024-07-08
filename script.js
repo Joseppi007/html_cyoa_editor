@@ -1,7 +1,7 @@
 let args = location.search.substr(1).split('&').map(e=>e.split('=')).reduce((a,b)=>{a[b[0]] = b[1]; return a;}, {}) ;
 let selected_page = "No page selected";
 
-let story_data = {title:'Untitled',description:'This story does not have a description.',author:'Joseppi007 (github) AKA Rose',pages:[{name:'Hello World',text:'This is a placeholder.\n{b:{u:{i:Nested Formatting Test}}}\nType something here: {set:example}\n{br}\nBreak test as well.\n{get:example}',next:[{name:'Welld Horlo',text:'==>'}],first:true},{name:'Welld Horlo',text:'phir is a tlaceholdes.',next:[{name:'Hello World',text:'==>'}],first:false}]};
+let story_data = {title:'Untitled',description:'This story does not have a description.',author:'Joseppi007 (github) AKA Rose',pages:[{name:'Hello World',text:'{scene:https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.worldatlas.com%2Fr%2Fw1200%2Fupload%2F04%2Fab%2Fd1%2Ffish-species-tropical.jpg&f=1&nofb=1&ipt=59de0569334d2bfa49fb446d27052056d28a3c3f0431ca4f168a214a0871cde4&ipo=images}\n{scene_character(-1,1):https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.worldatlas.com%2Fr%2Fw1200%2Fupload%2F04%2Fab%2Fd1%2Ffish-species-tropical.jpg&f=1&nofb=1&ipt=59de0569334d2bfa49fb446d27052056d28a3c3f0431ca4f168a214a0871cde4&ipo=images}\n{scene_character(0,0.5):https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.worldatlas.com%2Fr%2Fw1200%2Fupload%2F04%2Fab%2Fd1%2Ffish-species-tropical.jpg&f=1&nofb=1&ipt=59de0569334d2bfa49fb446d27052056d28a3c3f0431ca4f168a214a0871cde4&ipo=images}\n{scene_character(1,0.1):https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.worldatlas.com%2Fr%2Fw1200%2Fupload%2F04%2Fab%2Fd1%2Ffish-species-tropical.jpg&f=1&nofb=1&ipt=59de0569334d2bfa49fb446d27052056d28a3c3f0431ca4f168a214a0871cde4&ipo=images}\nThis is a placeholder.\n{b:{u:{i:Nested Formatting Test}}}\nType something here: {set:example}\n{br}\nBreak test as well.\n{get:example}',next:[{name:'Welld Horlo',text:'==>'}],first:true},{name:'Welld Horlo',text:'phir is a tlaceholdes.',next:[{name:'Hello World',text:'==>'}],first:false}]};
 let special_story_data = {help:{title:'The Guide',description:'This is a guide to help users in the creation of stories using this tool.',author:'Joseppi007 (github) AKA Rose',pages:[{name:'Start',text:'This is currently quite empty.',next:[],first:true}]}}
 let story_vars = {};
 let baseDelay = 10;
@@ -188,6 +188,30 @@ async function populateWithText_(domElem, formatProcessedText, delayMultiplier =
 	    };
 	    if (story_vars[piece.kids] == undefined) {story_vars[piece.kids] = "";}
 	    newElem.value = story_vars[piece.kids];
+	    continue;
+	}
+	if (piece.type == "scene" || piece.type == "scene_background" || piece.type == "scene_bg") {
+	    let newElem = document.createElement("div");
+	    newElem.style = "width: 100%; height: 65vh; background-color: var(--primary-bg); overflow: hidden;";
+	    domElem.appendChild(newElem);
+	    let newElem1 = document.createElement("div");
+	    newElem1.style = "aspect-ratio: 16 / 9; height:100%; margin: auto; background-image: url("+piece.kids[0]+"); overflow: hidden; background-repeat: no-repeat; background-size: 100% 100%; position: relative;";
+	    newElem1.id = "scene_div";
+	    newElem.appendChild(newElem1);
+	    continue;
+	}
+	if (piece.type.match(/scene_character\(\d*.?\d*\, ?\d*.?\d*\)/)) {
+	    let x = piece.type.substring(16, piece.type.indexOf(','));
+	    console.log(x); //DEBUG
+	    x = Number(x);
+	    x = ( x + 1 ) / 2;
+	    let y = piece.type.substr(piece.type.indexOf(',')+1+((piece.type.indexOf(" ")==-1)?0:1));
+	    y = Number(y.substr(0, y.length-1));
+	    y = 1 - y;
+	    console.log('DEBUG:', x, y); //DEBUG
+	    let newElem = document.createElement("div");
+	    newElem.style = "aspect-ratio: 9 / 16; height: 100%; background-image: url("+piece.kids[0]+"); position: absolute; left: "+(68.359375*x)+"%; top: "+(100*y)+"%; background-repeat: no-repeat; background-size: 100% 100%;";
+	    document.getElementById("scene_div").appendChild(newElem);
 	    continue;
 	}
     }
