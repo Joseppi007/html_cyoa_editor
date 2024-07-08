@@ -1,7 +1,7 @@
 let args = location.search.substr(1).split('&').map(e=>e.split('=')).reduce((a,b)=>{a[b[0]] = b[1]; return a;}, {}) ;
 let selected_page = "No page selected";
 
-let story_data = {title:'Untitled',description:'This story does not have a description.',author:'Joseppi007 (github) AKA Rose',pages:[{name:'Hello World',text:'This is a placeholder.\n{b:{u:{i:Nested Formatting Test}}}\n{br}\nBreak test as well.',next:[{name:'Welld Horlo',text:'==>'}],first:true},{name:'Welld Horlo',text:'phir is a tlaceholdes.',next:[{name:'Hello World',text:'==>'}],first:false}]};
+let story_data = {title:'Untitled',description:'This story does not have a description.',author:'Joseppi007 (github) AKA Rose',pages:[{name:'Hello World',text:'This is a placeholder.\n{b:{u:{i:Nested Formatting Test}}}\nType something here: {set:example}\n{br}\nBreak test as well.\n{get:example}',next:[{name:'Welld Horlo',text:'==>'}],first:true},{name:'Welld Horlo',text:'phir is a tlaceholdes.',next:[{name:'Hello World',text:'==>'}],first:false}]};
 let story_vars = {};
 let baseDelay = 10;
 
@@ -172,6 +172,22 @@ async function populateWithText_(domElem, formatProcessedText, delayMultiplier =
 	}
 	if (piece.type == "br" || piece.type == "break") {
 	    // Shouldn't show up, actually…
+	}
+	if (piece.type == "get") {
+	    let newElem = document.createElement("span");
+	    domElem.appendChild(newElem);
+	    await populateWithPlainText(newElem, [story_vars[piece.kids]], delayMultiplier);
+	    continue;
+	}
+	if (piece.type == "set") {
+	    let newElem = document.createElement("input");
+	    domElem.appendChild(newElem);
+	    newElem.onchange = (event) => {
+		story_vars[piece.kids] = newElem.value;
+	    };
+	    if (story_vars[piece.kids] == undefined) {story_vars[piece.kids] = "";}
+	    newElem.value = story_vars[piece.kids];
+	    continue;
 	}
     }
 }
