@@ -1,7 +1,7 @@
 let args = location.search.substr(1).split('&').map(e=>e.split('=')).reduce((a,b)=>{a[b[0]] = b[1]; return a;}, {}) ;
 let selected_page = "No page selected";
 
-let story_data = {title:'Untitled',description:'This story does not have a description.',author:'Joseppi007 (github) AKA Rose',pages:[{name:'Hello World',text:'This is a placeholder.',next:[{name:'Welld Horlo',text:'==>'}],first:true},{name:'Welld Horlo',text:'phir is a tlaceholdes.',next:[{name:'Hello World',text:'==>'}],first:false}]};
+let story_data = {title:'Untitled',description:'This story does not have a description.',author:'Joseppi007 (github) AKA Rose',pages:[{name:'Hello World',text:'This is a placeholder.\n{b:{u:{i:Nested Formatting Test}}}\n{br}\nBreak test as well.',next:[{name:'Welld Horlo',text:'==>'}],first:true},{name:'Welld Horlo',text:'phir is a tlaceholdes.',next:[{name:'Hello World',text:'==>'}],first:false}]};
 let story_vars = {};
 let baseDelay = 10;
 
@@ -89,66 +89,78 @@ async function read_title_page(part = 0) {
     story_modal.showModal();
 }
 
-async function populateWithText(domElem, text, part = 0, delayMultiplier = 1) {
+function populateWithText(domElem, text, part = 0, delayMultiplier = 1) {
+    return populateWithText_(domElem, removeTrailingWhitespace(grabFormatTextPart(text, part)), delayMultiplier);
+}
+
+async function populateWithText_(domElem, formatProcessedText, delayMultiplier = 1) {
     domElem.innerText = "";
-    let ft = grabFormatTextPart(text, part);
-    for (let i = 0; i < ft.length; i++) {
-	piece = ft[i];
-	if (piece.type == "unformatted") {
+    for (let i = 0; i < formatProcessedText.length; i++) {
+	let piece = formatProcessedText[i];
+	if (typeof(piece) == "string") {
 	    let newElem = document.createTextNode("");
 	    domElem.appendChild(newElem);
-	    await populateWithPlainText(newElem, piece.text, delayMultiplier);
+	    await populateWithPlainText(newElem, piece, delayMultiplier);
+	    continue;
+	}
+	if (typeof(piece) != "object") {
+	    console.log(piece, "is", typeof(piece));
+	    continue;
+	}
+	if (piece.type == undefined) {
+	    console.log(piece, "type is undefined");
+	    continue;
 	}
 	if (piece.type == "bold" || piece.type == "b" || piece.type == "strong") {
 	    let newElem = document.createElement("strong");
 	    domElem.appendChild(newElem);
-	    await populateWithPlainText(newElem, piece.text, delayMultiplier);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier);
 	}
 	if (piece.type == "italics" || piece.type == "italic" || piece.type == "i" || piece.type == "it" || piece.type == "em") {
 	    let newElem = document.createElement("em");
 	    domElem.appendChild(newElem);
-	    await populateWithPlainText(newElem, piece.text, delayMultiplier);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier);
 	}
 	if (piece.type == "underline" || piece.type == "uline" || piece.type == "under" || piece.type == "u") {
 	    let newElem = document.createElement("u");
 	    domElem.appendChild(newElem);
-	    await populateWithPlainText(newElem, piece.text, delayMultiplier);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier);
 	}
 	if (piece.type == "h1") {
 	    let newElem = document.createElement("h1");
 	    domElem.appendChild(newElem);
-	    await populateWithPlainText(newElem, piece.text, delayMultiplier);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier);
 	}
 	if (piece.type == "h2") {
 	    let newElem = document.createElement("h2");
 	    domElem.appendChild(newElem);
-	    await populateWithPlainText(newElem, piece.text, delayMultiplier);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier);
 	}
 	if (piece.type == "h3") {
 	    let newElem = document.createElement("h3");
 	    domElem.appendChild(newElem);
-	    await populateWithPlainText(newElem, piece.text, delayMultiplier);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier);
 	}
 	if (piece.type == "h4") {
 	    let newElem = document.createElement("h4");
 	    domElem.appendChild(newElem);
-	    await populateWithPlainText(newElem, piece.text, delayMultiplier);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier);
 	}
 	if (piece.type == "h5") {
 	    let newElem = document.createElement("h5");
 	    domElem.appendChild(newElem);
-	    await populateWithPlainText(newElem, piece.text, delayMultiplier);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier);
 	}
 	if (piece.type == "h6") {
 	    let newElem = document.createElement("h6");
 	    domElem.appendChild(newElem);
-	    await populateWithPlainText(newElem, piece.text, delayMultiplier);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier);
 	}
 	if (piece.type.match(/typeRate\(\d*.?\d*\)/)) {
 	    let delayMultiplier1 = Number(piece.type.substr(9, piece.type.length-10));
 	    let newElem = document.createTextNode("");
 	    domElem.appendChild(newElem);
-	    await populateWithPlainText(newElem, piece.text, delayMultiplier*delayMultiplier1);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier*delayMultiplier1);
 	}
 	if (piece.type == "hr" || piece.type == "horizontal rule" || piece.type == "line" || piece.type == "--") {
 	    let newElem = document.createElement("hr");
@@ -174,6 +186,51 @@ async function populateWithPlainText(domElem, text, delaydelayMultiplier) {
 	}
 	await sleep(delaydelayMultiplier*baseDelay);
     };
+}
+
+function removeTrailingWhitespace(formattedText) {
+    let inWhiteSpacePart = true;
+    let ft = formattedText.filter((part)=>{
+	if (typeof(part) == 'string') {
+	    inWhiteSpacePart = false;
+	    return true;
+	}
+	if (typeof(part) != 'object') {
+	    inWhiteSpacePart = false;
+	    return true;
+	}
+	if (part.type != 'newLine') {
+	    inWhiteSpacePart = false;
+	    return true;
+	}
+	return !inWhiteSpacePart;
+    });
+    ft = ft.reverse();
+    inWhiteSpacePart = true;
+    ft = ft.filter((part)=>{
+	if (typeof(part) == 'string') {
+	    inWhiteSpacePart = false;
+	    return true;
+	}
+	if (typeof(part) != 'object') {
+	    inWhiteSpacePart = false;
+	    return true;
+	}
+	if (part.type != 'newLine') {
+	    inWhiteSpacePart = false;
+	    return true;
+	}
+	return !inWhiteSpacePart;
+    });
+    ft = ft.reverse();
+    if (typeof(ft[0]) == 'string') {
+	ft[0] = ft[0].match(/[^\s].*/)[0];
+    }
+    
+    if (typeof(ft[ft.length-1]) == 'string') {
+	ft[ft.length-1] = ft[ft.length-1].match(/.*[^\s]/)[0];
+    }
+    return ft;
 }
 
 // Breaks on {type:"break",text:""}
@@ -208,7 +265,7 @@ function grabFormatTextPartCount(text) {
 /*
  * Format Text is in the form "Hello, {get:name}!"
  * Curly braces can be escaped with backslash.
- * This function returns the example as [{type:"unformatted",text:"Hello, "},{type:"get",text:"name"},{type:"unformatted",text:"!"}].
+ * This function returns the example as ["Hello, ",{type:"get",kids:["name"]},"!"].
  */
 function grabFormatText(text) {
     text = text.replace(/\n/g, "{newLine}");
@@ -218,26 +275,26 @@ function grabFormatText(text) {
 	let openBraceIndex = unescapedIndexOf(text, '{', indexOfLastCharProcessed+1);
 	if (openBraceIndex == -1) {
 	    if (indexOfLastCharProcessed != text.length - 1) {
-		accumulator.push({type:"unformatted",text:text.substr(indexOfLastCharProcessed+1)});
+		accumulator.push(text.substr(indexOfLastCharProcessed+1));
 	    }
 	    return accumulator;
 	}
-	let closeBraceIndex = unescapedIndexOf(text, '}', openBraceIndex+1);
+	let closeBraceIndex = unescapedMatchingIndexOf(text, '}', ['{', '}'], openBraceIndex);
 	if (closeBraceIndex == -1) {
 	    if (indexOfLastCharProcessed != text.length - 1) {
-		accumulator.push({type:"unformatted",text:text.substr(indexOfLastCharProcessed+1)});
+		accumulator.push(text.substr(indexOfLastCharProcessed+1));
 	    }
 	    return accumulator;
 	}
 	let colonIndex = unescapedIndexOf(text, ':', openBraceIndex);
 	if (openBraceIndex != indexOfLastCharProcessed + 1) {
-	    accumulator.push({type:"unformatted",text:text.substr(indexOfLastCharProcessed+1, openBraceIndex-indexOfLastCharProcessed-1)});
+	    accumulator.push(text.substr(indexOfLastCharProcessed+1, openBraceIndex-indexOfLastCharProcessed-1));
 	    indexOfLastCharProcessed = openBraceIndex - 1;
 	}
 	if (colonIndex == -1 || colonIndex > closeBraceIndex) {
-	    accumulator.push({type:text.substr(openBraceIndex+1, closeBraceIndex-openBraceIndex-1), text:""});
+	    accumulator.push({type:text.substr(openBraceIndex+1, closeBraceIndex-openBraceIndex-1), kids:[]});
 	} else {
-	    accumulator.push({type:text.substr(openBraceIndex+1, colonIndex-openBraceIndex-1), text:text.substr(colonIndex+1, closeBraceIndex-colonIndex-1)});
+	    accumulator.push({type:text.substr(openBraceIndex+1, colonIndex-openBraceIndex-1), kids:grabFormatText(text.substr(colonIndex+1, closeBraceIndex-colonIndex-1))});
 	}
 	indexOfLastCharProcessed = closeBraceIndex;
     }
@@ -251,6 +308,19 @@ function unescapedIndexOf(source, search, startIndex) {
 	if (index == -1) {return -1;}
     }
     return index;
+}
+
+// If searching for '{', pair should be ['{', '}']
+function unescapedMatchingIndexOf(source, search, pair, startIndex) {
+    let count = 0;
+    for (let i = startIndex; i < source.length; i++) {
+	if (source.substr(i, pair[1].length) == pair[1]) {count--;}
+	if (source.substr(i, search.length) == search && count == 0) {
+	    return i;
+	}
+	if (source.substr(i, pair[0].length) == pair[0]) {count++;}
+    }
+    return -1;
 }
 
 function story_edit() {
