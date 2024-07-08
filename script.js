@@ -2,15 +2,16 @@ let args = location.search.substr(1).split('&').map(e=>e.split('=')).reduce((a,b
 let selected_page = "No page selected";
 
 let story_data = {title:'Untitled',description:'This story does not have a description.',author:'Joseppi007 (github) AKA Rose',pages:[{name:'Hello World',text:'This is a placeholder.\n{b:{u:{i:Nested Formatting Test}}}\nType something here: {set:example}\n{br}\nBreak test as well.\n{get:example}',next:[{name:'Welld Horlo',text:'==>'}],first:true},{name:'Welld Horlo',text:'phir is a tlaceholdes.',next:[{name:'Hello World',text:'==>'}],first:false}]};
+let special_story_data = {help:{title:'The Guide',description:'This is a guide to help users in the creation of stories using this tool.',author:'Joseppi007 (github) AKA Rose',pages:[{name:'Start',text:'This is currently quite empty.',next:[],first:true}]}}
 let story_vars = {};
 let baseDelay = 10;
 
-function story_start() {
-    read_title_page();
+function story_start(used_story_data = story_data) {
+    read_title_page(0, used_story_data);
 }
 
-async function read_page(page_name, part = 0) {
-    let page = get_page(page_name);
+async function read_page(page_name, part = 0, used_story_data = story_data) {
+    let page = get_page(page_name, used_story_data);
     let d = document.createElement('div');
     story_div.innerText = "";
     story_div.appendChild(d);
@@ -41,7 +42,7 @@ async function read_page(page_name, part = 0) {
     }
 }
 
-async function read_title_page(part = 0) {
+async function read_title_page(part = 0, used_story_data = story_data) {
     story_div.innerText = "";
     story_footer.innerText = "";
     
@@ -55,32 +56,32 @@ async function read_title_page(part = 0) {
     close_modals();
     story_modal.showModal();
     
-    await populateWithText(titleH1, story_data.title);
-    await populateWithText(authorH3, "By "+story_data.author);
-    await populateWithText(descP, story_data.description);
+    await populateWithText(titleH1, used_story_data.title);
+    await populateWithText(authorH3, "By "+used_story_data.author);
+    await populateWithText(descP, used_story_data.description);
     story_div.innerText = "";
     story_div.appendChild(titleH1);
     story_div.appendChild(authorH3);
     story_div.appendChild(descP);
     Array.from(story_footer.children).forEach(e=>e.remove());
-    let firsts = story_data.pages.filter(page=>page.first);
+    let firsts = used_story_data.pages.filter(page=>page.first);
     if (firsts.length != 1) {
 	alert("There was an issue finding the first page. Sorry.");
 	return;
     }
     let first = firsts[0].name;
-    if (part == grabFormatTextPartCount(story_data.description) - 1) {
+    if (part == grabFormatTextPartCount(used_story_data.description) - 1) {
 	let button = document.createElement('button');
 	button.innerText = "Begin";
 	button.onclick = ()=>{
-	    read_page( first );
+	    read_page( first, 0, used_story_data );
 	};
 	story_footer.appendChild(button);
     } else {
 	let button = document.createElement('button');
 	button.innerText = "→";
 	button.onclick = ()=>{
-	    read_title_page(part+1);
+	    read_title_page(part+1, used_story_data);
 	};
 	story_footer.appendChild(button);
     }
@@ -158,7 +159,7 @@ async function populateWithText_(domElem, formatProcessedText, delayMultiplier =
 	}
 	if (piece.type.match(/typeRate\(\d*.?\d*\)/)) {
 	    let delayMultiplier1 = Number(piece.type.substr(9, piece.type.length-10));
-	    let newElem = document.createTextNode("");
+	    let newElem = document.createElement("span");
 	    domElem.appendChild(newElem);
 	    await populateWithText_(newElem, piece.kids, delayMultiplier*delayMultiplier1);
 	}
@@ -176,7 +177,7 @@ async function populateWithText_(domElem, formatProcessedText, delayMultiplier =
 	if (piece.type == "get") {
 	    let newElem = document.createElement("span");
 	    domElem.appendChild(newElem);
-	    await populateWithPlainText(newElem, [story_vars[piece.kids]], delayMultiplier);
+	    await populateWithText_(newElem, [story_vars[piece.kids]], delayMultiplier);
 	    continue;
 	}
 	if (piece.type == "set") {
@@ -339,7 +340,7 @@ function unescapedMatchingIndexOf(source, search, pair, startIndex) {
     return -1;
 }
 
-function story_edit() {
+function story_edit(used_story_data = story_data) {
     Array.from(page_list.children).forEach(e=>{e.remove();});
     {
 	let li = document.createElement('li');
@@ -353,7 +354,7 @@ function story_edit() {
 	li.appendChild(button);
 	page_list.appendChild(li);
     }
-    story_data.pages.forEach(page=>{
+    used_story_data.pages.forEach(page=>{
 	let li = document.createElement('li');
 	let button = document.createElement('button');
 	button.innerText = page.name;
@@ -393,14 +394,14 @@ function open_title_page_options_menu() {
     title_edit_modal.showModal();
 }
 
-function make_first_page(page_name) {
-    story_data.pages.map(page=>{
+function make_first_page(page_name, used_story_data = story_data) {
+    used_story_data.pages.map(page=>{
 	page.first = page.name == page_name;
     });
 }
 
-function create_page(page_name) {
-    story_data.pages.push({name:page_name, text:'', next:[]});
+function create_page(page_name, used_story_data = story_data) {
+    used_story_data.pages.push({name:page_name, text:'', next:[]});
 }
 
 function create_unnamed_page() {
@@ -419,8 +420,8 @@ function create_unnamed_page() {
     return name;
 }
 
-function delete_page(page_name) {
-    story_data.pages = story_data.pages.filter(page=>page.name!=page_name);
+function delete_page(page_name, used_story_data = story_data) {
+    story_data.pages = used_story_data.pages.filter(page=>page.name!=page_name);
 }
 
 function edit_page(page_name) {
@@ -435,12 +436,12 @@ function edit_page(page_name) {
     edit_modal.showModal();
 }
 
-function page_exists(page_name) {
-    return story_data.pages.reduce((a,b)=>(a || b.name == page_name), false);
+function page_exists(page_name, used_story_data = story_data) {
+    return used_story_data.pages.reduce((a,b)=>(a || b.name == page_name), false);
 }
 
-function get_page(page_name) {
-    return story_data.pages.filter(page=>page.name==page_name)[0];
+function get_page(page_name, used_story_data = story_data) {
+    return used_story_data.pages.filter(page=>page.name==page_name)[0];
 }
 
 function close_modals() {
