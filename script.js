@@ -202,13 +202,11 @@ async function populateWithText_(domElem, formatProcessedText, delayMultiplier =
 	}
 	if (piece.type.match(/scene_character\(\d*.?\d*\, ?\d*.?\d*\)/)) {
 	    let x = piece.type.substring(16, piece.type.indexOf(','));
-	    console.log(x); //DEBUG
 	    x = Number(x);
 	    x = ( x + 1 ) / 2;
 	    let y = piece.type.substr(piece.type.indexOf(',')+1+((piece.type.indexOf(" ")==-1)?0:1));
 	    y = Number(y.substr(0, y.length-1));
 	    y = 1 - y;
-	    console.log('DEBUG:', x, y); //DEBUG
 	    let newElem = document.createElement("div");
 	    newElem.style = "aspect-ratio: 9 / 16; height: 100%; background-image: url("+piece.kids[0]+"); position: absolute; left: "+(68.359375*x)+"%; top: "+(100*y)+"%; background-repeat: no-repeat; background-size: 100% 100%;";
 	    document.getElementById("scene_div").appendChild(newElem);
@@ -240,6 +238,9 @@ function removeTrailingWhitespace(formattedText) {
 	    inWhiteSpacePart = false;
 	    return true;
 	}
+	if (part.type.substring(0,5) == 'scene') {
+	    return true;
+	}
 	if (part.type != 'newLine') {
 	    inWhiteSpacePart = false;
 	    return true;
@@ -257,6 +258,9 @@ function removeTrailingWhitespace(formattedText) {
 	    inWhiteSpacePart = false;
 	    return true;
 	}
+	if (part.type.substring(0,5) == 'scene') {
+	    return true;
+	}
 	if (part.type != 'newLine') {
 	    inWhiteSpacePart = false;
 	    return true;
@@ -264,13 +268,19 @@ function removeTrailingWhitespace(formattedText) {
 	return !inWhiteSpacePart;
     });
     ft = ft.reverse();
-    if (typeof(ft[0]) == 'string') {
-	ft[0] = ft[0].match(/[^\s].*/)[0];
-    }
-    
-    if (typeof(ft[ft.length-1]) == 'string') {
-	ft[ft.length-1] = ft[ft.length-1].match(/.*[^\s]/)[0];
-    }
+//    if (typeof(ft[0]) == 'string') {
+//	ft[0] = ft[0].match(/[^\s].*/)[0];
+//    }
+//    if (typeof(ft[ft.length-1]) == 'string') {
+//	ft[ft.length-1] = ft[ft.length-1].match(/.*[^\s]/)[0];
+//    }
+    ft = ft.map((part)=>{
+	if (typeof(part) != 'string') {
+	    return {type:part.type, kids:removeTrailingWhitespace(part.kids)};
+	}
+//	return part.match(/[^\s].*[^\s]/)[0];
+	return part;
+    });
     return ft;
 }
 
