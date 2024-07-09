@@ -45,13 +45,13 @@
     --high-contrast-main-fg: #fff;
     --high-contrast-primary-bg: #000;
     --high-contrast-primary-fg: #fff;
-    --high-contrast-secondary-bg: #000;
-    --high-contrast-secondary-fg: #fff;
-    --high-contrast-tertiary-bg: #000;
-    --high-contrast-tertiary-fg: #fff;
-    --high-contrast-transparent: #000e;
-    --high-contrast-close-bg: #f00;
-    --high-contrast-close-fg: #000;
+    --high-contrast-secondary-bg: #fff;
+    --high-contrast-secondary-fg: #000;
+    --high-contrast-tertiary-bg: #fff;
+    --high-contrast-tertiary-fg: #000;
+    --high-contrast-transparent: #000;
+    --high-contrast-close-bg: #000;
+    --high-contrast-close-fg: #f00;
     --high-contrast-close2-bg: #000;
     --high-contrast-close2-fg: #fff;
     --high-contrast-close3-bg: #000;
@@ -60,7 +60,7 @@
     --high-contrast-contrast-fg: #000;
     --high-contrast-ta-bg: #000;
     --high-contrast-ta-fg: #fff;
-    --high-contrast-header-bg: #666;
+    --high-contrast-header-bg: #000;
 
     --main-bg: var(--light-main-bg);
     --main-fg: var(--light-main-fg);
@@ -192,6 +192,16 @@ div.footer {
     bottom: 0em;
 }
 
+.high-contrast-mode div.header, .high-contrast-mode div.footer, .high-contrast-mode button, .high-contrast-mode dialog {
+    border: 0.125em;
+    border-color: var(--primary-fg);
+    border-style: solid;
+}
+
+.high-contrast-mode button.close {
+    border-color: var(--close-fg);
+}
+
 button {
     border: none;
     height: 2em;
@@ -267,6 +277,18 @@ dialog::backdrop {
 
 .mono {
     font-family: mono;
+}
+
+.serif {
+    font-family: serif;
+}
+
+.sans-serif {
+    font-family: sans-serif;
+}
+
+.cursive {
+    font-family: cursive;
 }
 
 .scroll-overflow {
