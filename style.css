@@ -84,6 +84,7 @@
     --header-bg: var(--light-header-bg);
 
     font-size: 1.8vh;
+    font-family: sans-serif;
 }
 
 body.light-mode {
