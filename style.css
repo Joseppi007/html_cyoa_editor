@@ -62,7 +62,7 @@
     --ta-fg: var(--light-ta-fg);
     --header-bg: var(--light-header-bg);
 
-    font-size: 2.2vh;
+    font-size: 1.8vh;
 }
 
 body.light-mode {
