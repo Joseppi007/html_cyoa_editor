@@ -41,6 +41,27 @@
     --dark-ta-fg: #fbf4ff;
     --dark-header-bg: #705f8f;
 
+    --high-contrast-main-bg: #000;
+    --high-contrast-main-fg: #fff;
+    --high-contrast-primary-bg: #000;
+    --high-contrast-primary-fg: #fff;
+    --high-contrast-secondary-bg: #000;
+    --high-contrast-secondary-fg: #fff;
+    --high-contrast-tertiary-bg: #000;
+    --high-contrast-tertiary-fg: #fff;
+    --high-contrast-transparent: #000e;
+    --high-contrast-close-bg: #f00;
+    --high-contrast-close-fg: #000;
+    --high-contrast-close2-bg: #000;
+    --high-contrast-close2-fg: #fff;
+    --high-contrast-close3-bg: #000;
+    --high-contrast-close3-fg: #fff;
+    --high-contrast-contrast-bg: #fff;
+    --high-contrast-contrast-fg: #000;
+    --high-contrast-ta-bg: #000;
+    --high-contrast-ta-fg: #fff;
+    --high-contrast-header-bg: #666;
+
     --main-bg: var(--light-main-bg);
     --main-fg: var(--light-main-fg);
     --primary-bg: var(--light-primary-bg);
@@ -109,6 +130,29 @@ body.dark-mode {
     --ta-bg: var(--dark-ta-bg);
     --ta-fg: var(--dark-ta-fg);
     --header-bg: var(--dark-header-bg);
+}
+
+body.high-contrast-mode {
+    --main-bg: var(--high-contrast-main-bg);
+    --main-fg: var(--high-contrast-main-fg);
+    --primary-bg: var(--high-contrast-primary-bg);
+    --primary-fg: var(--high-contrast-primary-fg);
+    --secondary-bg: var(--high-contrast-secondary-bg);
+    --secondary-fg: var(--high-contrast-secondary-fg);
+    --tertiary-bg: var(--high-contrast-tertiary-bg);
+    --tertiary-fg: var(--high-contrast-tertiary-fg);
+    --transparent: var(--high-contrast-transparent);
+    --close-bg: var(--high-contrast-close-bg);
+    --close-fg: var(--high-contrast-close-fg);
+    --close2-bg: var(--high-contrast-close2-bg);
+    --close2-fg: var(--high-contrast-close2-fg);
+    --close3-bg: var(--high-contrast-close3-bg);
+    --close3-fg: var(--high-contrast-close3-fg);
+    --contrast-bg: var(--high-contrast-contrast-bg);
+    --contrast-fg: var(--high-contrast-contrast-fg);
+    --ta-bg: var(--high-contrast-ta-bg);
+    --ta-fg: var(--high-contrast-ta-fg);
+    --header-bg: var(--high-contrast-header-bg);
 }
 
 body {

@@ -604,11 +604,15 @@ function figure_out_theme(theme = args.theme) {
     if (theme != undefined) { theme = theme.toLowerCase(); }
     document.body.classList.remove("dark-mode");
     document.body.classList.remove("light-mode");
+    document.body.classList.remove("high-contrast-mode");
     if (theme == 'l' || theme == 'light' || theme == 'light mode') {
 	document.body.classList.add("light-mode");
     }
     if (theme == 'd' || theme == 'dark' || theme == 'dark mode') {
 	document.body.classList.add("dark-mode");
+    }
+    if (theme == 'hc' || theme == 'high contrast' || theme == 'contrast') {
+	document.body.classList.add("high-contrast-mode");
     }
 }
 
