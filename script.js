@@ -34,6 +34,7 @@ async function read_page(page_name, part = 0, used_story_data = story_data) {
 	    await populateWithText(button, btn.text);
 	    button.onclick = ()=>{
 		scene_data.bgImg = undefined;
+		scene_data.characters = [];
 		read_page(btn.name, 0, used_story_data);
 	    };
 	    story_footer.appendChild(button);
@@ -51,6 +52,8 @@ async function read_page(page_name, part = 0, used_story_data = story_data) {
 async function read_title_page(part = 0, used_story_data = story_data) {
     story_div.innerText = "";
     story_footer.innerText = "";
+    scene_data.bgImg = undefined;
+    scene_data.characters = [];
     
     let titleH1 = document.createElement('h1');
     let authorH3 = document.createElement('h3');
@@ -81,6 +84,7 @@ async function read_title_page(part = 0, used_story_data = story_data) {
 	button.innerText = "Begin";
 	button.onclick = ()=>{
 	    scene_data.bgImg = undefined;
+	    scene_data.characters = [];
 	    read_page( first, 0, used_story_data );
 	};
 	story_footer.appendChild(button);
@@ -237,6 +241,7 @@ async function populateWithText_(domElem, formatProcessedText, delayMultiplier =
 	}
 	if (piece.type == "scene_remove" || piece.type == "scene_delete" || piece.type == "scene_del" || piece.type == "scene_rm") {
 	    scene_data.bgImg = undefined;
+	    scene_data.characters = [];
 	    repopulateSceneDiv(domElem);
 	    continue;
 	}
@@ -267,11 +272,11 @@ function repopulateSceneDiv(baseDomElem) {
     if (scene_data.bgImg != undefined) {
 	if (!document.getElementById("scene_div_div")) {
 	    let newElem0 = document.createElement("div");
-	    newElem0.style = "width: 100%; height: 65vh; background-color: var(--primary-bg); overflow: hidden;";
+	    newElem0.style = "width: 100%; height: clamp(10vh,calc(56.25vw - 4.5em),calc(100vh - 11em - 30px - 5em)); background-color: var(--primary-bg); overflow: hidden;";
 	    newElem0.id = "scene_div_div";
 	    baseDomElem.prepend(newElem0);
 	    let newElem1 = document.createElement("div");
-	    newElem1.style = "aspect-ratio: 16 / 9; height:100%; margin: auto; background-image: url("+scene_data.bgImg+"); overflow: hidden; background-repeat: no-repeat; background-size: 100% 100%; position: relative;";
+	    newElem1.style = "aspect-ratio: 16 / 9; height: 100%; margin: auto; background-image: url("+scene_data.bgImg+"); overflow: hidden; background-repeat: no-repeat; background-size: 100% 100%; position: relative;";
 	    newElem1.id = "scene_div";
 	    newElem0.appendChild(newElem1);
 	}
@@ -594,13 +599,6 @@ function open_file_menu() {
 
 function figure_out_theme(theme = args.theme) {
     if (theme != undefined) { theme = theme.toLowerCase(); }
-//    while (theme != 'l' && theme != 'd' && theme != 'light' && theme != 'dark' && theme != 'light mode' && theme != 'dark mode') {
-//	let answer = prompt("Please enter the first letter of your prefered theme:\n[L]ight mode\n[D]ark mode");
-//	if (answer == null) {
-//	    answer = (Math.random()>0.5)?'l':'d';
-//	}
-//	theme = answer.toLowerCase();
-//    }
     document.body.classList.remove("dark-mode");
     document.body.classList.remove("light-mode");
     if (theme == 'l' || theme == 'light' || theme == 'light mode') {
