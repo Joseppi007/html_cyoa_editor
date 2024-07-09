@@ -200,6 +200,16 @@ div.footer {
     border-style: solid;
 }
 
+.high-contrast-mode div.header {
+    border-width: 0em;
+    border-bottom-width: 0.125em;
+}
+
+.high-contrast-mode div.footer {
+    border-width: 0em;
+    border-top-width: 0.125em;
+}
+
 .high-contrast-mode button.close, .high-contrast-mode button.danger {
     border-color: var(--close-fg);
 }
