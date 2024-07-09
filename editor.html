@@ -13,6 +13,7 @@
 	<button onclick="story_edit();">Edit</button>
 	<button onclick="story_start();">Play</button>
 	<button onclick="story_start(special_story_data.help);">Help</button>
+	<button onclick="options_modal.showModal();">Options</button>
       </div>
     </div>
     <dialog aria-modal="true" id="file_menu">
@@ -21,7 +22,7 @@
       <p>Save your story to a <span class="mono">.JSON</span> file or load a <span class="mono">.JSON</span> file.<br/>I thought about having a whole file manipulation piece of code, but then I remembered you can probably just copy/paste from the below textarea.</p>
       <textarea id="story_data_json" onchange="story_data=JSON.parse(this.value);" style="width:90%;height:50%;"></textarea>
     </dialog>
-    <dialog aria-modal="true" id="story_modal" class="hidden-overflow" onmousedown="baseDelay=0;" onmouseup="baseDelay=10;">
+    <dialog aria-modal="true" id="story_modal" class="hidden-overflow" onmousedown="baseDelay=0;" onmouseup="baseDelay=baseBaseDelay;" ontouchstart="baseDelay=0;" ontouchend="baseDelay=baseBaseDelay;">
       <button class="close" onclick="story_modal.close();">&times;</button>
       <div id="story_div" class="scroll-overflow" style="height: calc(100% - 3em); width: calc(100% - 2em);">
 	This is a placeholder.
@@ -75,6 +76,14 @@
 	<p>Description:</p>
 	<textarea id="title_page_description_input" style="width:90%;height:50%;" onchange="save_edit_title();"></textarea>
 	<!--<button onclick="save_edit_title();">Save Changes</button>-->
+      </div>
+    </dialog>
+    <dialog aria-modal="true" id="options_modal" class="hidden-overflow">
+      <button class="close" onclick="options_modal.close();">&times;</button>
+      <div id="options_div" class="scroll-overflow" style="height: 100%;">
+	<button onclick="figure_out_theme('light');">Light Mode</button><br/>
+	<button onclick="figure_out_theme('dark');">Dark Mode</button><br/>
+	<input type="checkbox" onclick="if(this.value){baseBaseDelay=10;}else{baseBaseDelay=0;}"><label>Type Effect</label>
       </div>
     </dialog>
     <script>figure_out_theme();</script>

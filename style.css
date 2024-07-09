@@ -61,6 +61,8 @@
     --ta-bg: var(--light-ta-bg);
     --ta-fg: var(--light-ta-fg);
     --header-bg: var(--light-header-bg);
+
+    font-size: 2.2vh;
 }
 
 body.light-mode {
@@ -253,6 +255,12 @@ textarea, input {
     border-width: 0.125em;
     border-style: solid;
     border-color: var(--ta-fg);
+    font-size: 0.9em;
+}
+
+input[type="checkbox"] {
+    width: 1em;
+    height: 1em;
 }
 
 hr {
