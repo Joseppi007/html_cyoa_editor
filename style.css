@@ -52,10 +52,10 @@
     --high-contrast-transparent: #000;
     --high-contrast-close-bg: #000;
     --high-contrast-close-fg: #f00;
-    --high-contrast-close2-bg: #000;
-    --high-contrast-close2-fg: #fff;
-    --high-contrast-close3-bg: #000;
-    --high-contrast-close3-fg: #fff;
+    --high-contrast-close2-bg: #fff;
+    --high-contrast-close2-fg: #000;
+    --high-contrast-close3-bg: #f00;
+    --high-contrast-close3-fg: #000;
     --high-contrast-contrast-bg: #fff;
     --high-contrast-contrast-fg: #000;
     --high-contrast-ta-bg: #000;
@@ -154,6 +154,8 @@ body.high-contrast-mode {
     --ta-bg: var(--high-contrast-ta-bg);
     --ta-fg: var(--high-contrast-ta-fg);
     --header-bg: var(--high-contrast-header-bg);
+
+    font-size: 1.1em;
 }
 
 body {
@@ -193,13 +195,23 @@ div.footer {
 }
 
 .high-contrast-mode div.header, .high-contrast-mode div.footer, .high-contrast-mode button, .high-contrast-mode dialog {
-    border: 0.125em;
+    border-width: 0.125em;
     border-color: var(--primary-fg);
     border-style: solid;
 }
 
-.high-contrast-mode button.close {
+.high-contrast-mode button.close, .high-contrast-mode button.danger {
     border-color: var(--close-fg);
+}
+
+.high-contrast-mode button.close:hover, .high-contrast-mode button.danger:hover {
+    border-color: var(--close-fg);
+    border-width: 0.1625em;
+}
+
+.high-contrast-mode button.close:active, .high-contrast-mode button.danger:active {
+    border-color: var(--primary-fg);
+    border-width: 0.2em;
 }
 
 button {
