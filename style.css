@@ -234,6 +234,11 @@ div.header > div, div.footer > div {
     flex: auto;
 }
 
+.haxor-mode div.header > div::before, .haxor-mode div.footer > div::before, .haxor-mode div.header > div::after, .haxor-mode div.footer > div::after {
+    content: "";
+    flex: 0 0 0px;
+}
+
 div.header {
     top: 0em;
 }
