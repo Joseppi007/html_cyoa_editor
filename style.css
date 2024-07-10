@@ -305,8 +305,8 @@ dialog::backdrop {
     font-family: serif;
 }
 
-.sans-serif {
-    font-family: sans-serif;
+.sans {
+    font-family: sans;
 }
 
 .cursive {
