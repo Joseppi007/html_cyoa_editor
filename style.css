@@ -229,7 +229,7 @@ div.header > div, div.footer > div {
     display: flex;
 }
 
-div.header > div::before, div.footer > div::before, div.header > div::after, div.footer > div::after {
+:not(.haxor-mode) div.header > div::before, :not(.haxor-mode) div.footer > div::before, :not(.haxor-mode) div.header > div::after, :not(.haxor-mode) div.footer > div::after {
     content: "";
     flex: auto;
 }
@@ -307,7 +307,7 @@ div.header button {
     width: 5em;
 }
 
-.haxor-mode div.header button {
+.haxor-mode div.header button, .haxor-mode div.footer button {
     width: auto;
     flex: 1 0 auto;
 }
