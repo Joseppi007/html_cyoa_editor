@@ -62,6 +62,27 @@
     --high-contrast-ta-fg: #fff;
     --high-contrast-header-bg: #000;
 
+    --haxor-main-bg: #000;
+    --haxor-main-fg: #0f0;
+    --haxor-primary-bg: #000;
+    --haxor-primary-fg: #0f0;
+    --haxor-secondary-bg: #0f0;
+    --haxor-secondary-fg: #000;
+    --haxor-tertiary-bg: #3d6;
+    --haxor-tertiary-fg: #000;
+    --haxor-transparent: #000;
+    --haxor-close-bg: #000;
+    --haxor-close-fg: #f00;
+    --haxor-close2-bg: #f00;
+    --haxor-close2-fg: #000;
+    --haxor-close3-bg: #f60;
+    --haxor-close3-fg: #000;
+    --haxor-contrast-bg: #0f0;
+    --haxor-contrast-fg: #000;
+    --haxor-ta-bg: #000;
+    --haxor-ta-fg: #0f0;
+    --haxor-header-bg: #000;
+
     --main-bg: var(--light-main-bg);
     --main-fg: var(--light-main-fg);
     --primary-bg: var(--light-primary-bg);
@@ -158,6 +179,33 @@ body.high-contrast-mode {
     font-size: 1.1em;
 }
 
+body.haxor-mode {
+    --main-bg: var(--haxor-main-bg);
+    --main-fg: var(--haxor-main-fg);
+    --primary-bg: var(--haxor-primary-bg);
+    --primary-fg: var(--haxor-primary-fg);
+    --secondary-bg: var(--haxor-secondary-bg);
+    --secondary-fg: var(--haxor-secondary-fg);
+    --tertiary-bg: var(--haxor-tertiary-bg);
+    --tertiary-fg: var(--haxor-tertiary-fg);
+    --transparent: var(--haxor-transparent);
+    --close-bg: var(--haxor-close-bg);
+    --close-fg: var(--haxor-close-fg);
+    --close2-bg: var(--haxor-close2-bg);
+    --close2-fg: var(--haxor-close2-fg);
+    --close3-bg: var(--haxor-close3-bg);
+    --close3-fg: var(--haxor-close3-fg);
+    --contrast-bg: var(--haxor-contrast-bg);
+    --contrast-fg: var(--haxor-contrast-fg);
+    --ta-bg: var(--haxor-ta-bg);
+    --ta-fg: var(--haxor-ta-fg);
+    --header-bg: var(--haxor-header-bg);
+
+    font-family: "Audiowide", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
 body {
     background-color: var(--main-bg);
     color: var(--main-fg);
@@ -194,32 +242,32 @@ div.footer {
     bottom: 0em;
 }
 
-.high-contrast-mode div.header, .high-contrast-mode div.footer, .high-contrast-mode button, .high-contrast-mode dialog {
+.high-contrast-mode div.header, .high-contrast-mode div.footer, .high-contrast-mode button, .high-contrast-mode dialog, .haxor-mode div.header, .haxor-mode div.footer, .haxor-mode button, .haxor-mode dialog {
     border-width: 0.125em;
     border-color: var(--primary-fg);
     border-style: solid;
 }
 
-.high-contrast-mode div.header {
+.high-contrast-mode div.header, .haxor-mode div.header {
     border-width: 0em;
     border-bottom-width: 0.125em;
 }
 
-.high-contrast-mode div.footer {
+.high-contrast-mode div.footer, .haxor-mode div.footer {
     border-width: 0em;
     border-top-width: 0.125em;
 }
 
-.high-contrast-mode button.close, .high-contrast-mode button.danger {
+.high-contrast-mode button.close, .high-contrast-mode button.danger, .haxor-mode button.close, .haxor-mode button.danger {
     border-color: var(--close-fg);
 }
 
-.high-contrast-mode button.close:hover, .high-contrast-mode button.danger:hover {
+.high-contrast-mode button.close:hover, .high-contrast-mode button.danger:hover, .haxor-mode button.close:hover, .haxor-mode button.danger:hover {
     border-color: var(--close-fg);
     border-width: 0.1625em;
 }
 
-.high-contrast-mode button.close:active, .high-contrast-mode button.danger:active {
+.high-contrast-mode button.close:active, .high-contrast-mode button.danger:active, .haxor-mode button.close:active, .haxor-mode button.danger:active {
     border-color: var(--primary-fg);
     border-width: 0.2em;
 }

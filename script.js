@@ -647,6 +647,7 @@ function figure_out_theme(theme = args.theme) {
     document.body.classList.remove("dark-mode");
     document.body.classList.remove("light-mode");
     document.body.classList.remove("high-contrast-mode");
+    document.body.classList.remove("haxor-mode");
     if (theme == 'l' || theme == 'light' || theme == 'light mode') {
 	document.body.classList.add("light-mode");
     }
@@ -655,6 +656,9 @@ function figure_out_theme(theme = args.theme) {
     }
     if (theme == 'hc' || theme == 'high contrast' || theme == 'contrast') {
 	document.body.classList.add("high-contrast-mode");
+    }
+    if (theme == 'h' || theme == 'haxor' || theme == 'h4x0r') {
+	document.body.classList.add("haxor-mode");
     }
 }
 
