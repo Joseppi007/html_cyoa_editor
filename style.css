@@ -313,6 +313,22 @@ dialog::backdrop {
     font-family: cursive;
 }
 
+.fantasy {
+    font-family: fantasy;
+}
+
+.anton-sc {
+  font-family: "Anton SC", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.audiowide {
+  font-family: "Audiowide", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 .scroll-overflow {
     overflow: scroll;
 }
