@@ -39,7 +39,8 @@
       <div id="page_list_div" class="scroll-overflow" style="height: 100%;">
 	<h1>Page List</h1>
 	<p>
-	  This is a list of all of the pages in the story. Select a page to choose an action to do with it, including reading starting from that page, setting it to the first page of the story, removing it, or editing it.
+	  This is a list of all of the pages in the story. Select a page to choose an action to do with it, including reading starting from that page, setting it to the first page of the story, removing it, or editing it.<br/>
+	  Note that there are also special pages, such as the <i>Title Page</i> and <i>List of Image Links Page</i>.
 	</p>
 	<ul class="vert-button-list" id="page_list">
 	</ul>
@@ -86,8 +87,15 @@
 	<button onclick="figure_out_theme('dark');">Dark Mode</button><br/>
 	<button onclick="figure_out_theme('high contrast');">High Contrast Mode</button><br/>
 	<button onclick="figure_out_theme('haxor');" class="audiowide">H4X0R Mode</button><br/>
-	<input type="checkbox" onclick="if(this.value){baseBaseDelay=10;}else{baseBaseDelay=0;}"><label>Type Effect</label>
+	<input type="checkbox" onclick="if(this.checked){baseBaseDelay=10;}else{baseBaseDelay=0;}baseDelay=baseBaseDelay;" id="type_effect_check_box"><label>Type Effect</label>
+	<script>if(type_effect_check_box.checked){baseBaseDelay=10;}else{baseBaseDelay=0;}baseDelay=baseBaseDelay;</script>
       </div>
+    </dialog>
+    <dialog aria-modal="true" id="image_links_edit_modal">
+      <button class="close" onclick="image_links_edit_modal.close();">&times;</button>
+      <h1>Image Links</h1>
+      <p>Please format the image links as <i>Reference Name</i>:<i>Link</i><br/>The reference name is used when making scenes or placing characters in scenes.</p>
+      <textarea id="image_links_edit_input" onchange="save_edit_image_links(this.value);" style="width:90%;height:50%;"></textarea>
     </dialog>
     <script>figure_out_theme();</script>
   </body>

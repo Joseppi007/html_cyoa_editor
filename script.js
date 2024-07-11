@@ -517,6 +517,18 @@ function story_edit(used_story_data = story_data) {
 	li.appendChild(button);
 	page_list.appendChild(li);
     }
+    {
+	let li = document.createElement('li');
+	let button = document.createElement('button');
+	let em = document.createElement('em');
+	em.innerText = 'List of Image Links Page';
+	button.appendChild(em);
+	button.onclick = (event)=>{
+	    open_image_links_page_options_menu();
+	}
+	li.appendChild(button);
+	page_list.appendChild(li);
+    }
     used_story_data.pages.forEach(page=>{
 	let li = document.createElement('li');
 	let button = document.createElement('button');
@@ -555,6 +567,14 @@ function open_title_page_options_menu() {
     title_page_description_input.value = story_data.description;
     close_modals();
     title_edit_modal.showModal();
+}
+
+function open_image_links_page_options_menu() {
+    image_links_edit_input.value = story_data.images.reduce((a,i)=>{
+	return a+'\n'+i.name+':'+i.link;
+    }, '').substr(1);
+    close_modals();
+    image_links_edit_modal.showModal();
 }
 
 function make_first_page(page_name, used_story_data = story_data) {
@@ -634,6 +654,14 @@ function save_edit_title() {
     story_data.title = title_page_title_input.value;
     story_data.author = title_page_author_input.value;
     story_data.description = title_page_description_input.value;
+}
+
+function save_edit_image_links() {
+    story_data.images = image_links_edit_input.value.split('\n').map(e=>{
+	let i = e.indexOf(':');
+	if (i == -1) {return  false;}
+	return {name: e.substring(0, i), link: e.substring(i+1)};
+    }).filter(e=>e);
 }
 
 function open_file_menu() {
