@@ -4,10 +4,10 @@ let selected_page = "No page selected";
 let example_bg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAALCAIAAAAStyFtAAABg2lDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw0AcxV9TpUUqgnYQccjQOtlFRRxrFYpQIdQKrTqYXPoFTQxJiouj4Fpw8GOx6uDirKuDqyAIfoA4OzgpukiJ/0sKLWI8OO7Hu3uPu3eA0KwxzepJAppum9l0SswXVsTQK0IIYxBxiDKzjFlJysB3fN0jwNe7BM/yP/fn6FeLFgMCInGSGaZNvE48vWkbnPeJo6wiq8TnxOMmXZD4keuKx2+cyy4LPDNq5rJzxFFisdzFSheziqkRTxHHVE2nfCHvscp5i7NWq7P2PfkLI0V9eYnrNEeRxgIWIUGEgjqqqMFGgladFAtZ2k/5+Edcv0QuhVxVMHLMYwMaZNcP/ge/u7VKkxNeUiQF9L44zkccCO0CrYbjfB87TusECD4DV3rHv9EEZj5Jb3S02BEwsA1cXHc0ZQ+43AGGnwzZlF0pSFMolYD3M/qmAjB0C/Ster2193H6AOSoq8wNcHAIjJUpe83n3eHu3v490+7vB5xzcrcCFsYUAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAB3RJTUUH6AcIEicefj8/qAAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAABiSURBVCjPY7Td/5eBgeGQAxMDA4PdgX9wBgMOsEZcH8JggmvDyoBz0UQYGBgYIXbiAch6IG6BWEtYJy7AxEAuGAidLMicW1clIQw17efIXLgI9rBFVocLIOtnFJ8iRm9/AgDvNiGxpkorPAAAAABJRU5ErkJggg==';
 let example_character = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAATCAYAAABGKffQAAABg2lDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw0AcxV9TpUUqgnYQccjQOtlFRRxrFYpQIdQKrTqYXPoFTQxJiouj4Fpw8GOx6uDirKuDqyAIfoA4OzgpukiJ/0sKLWI8OO7Hu3uPu3eA0KwxzepJAppum9l0SswXVsTQK0IIYxBxiDKzjFlJysB3fN0jwNe7BM/yP/fn6FeLFgMCInGSGaZNvE48vWkbnPeJo6wiq8TnxOMmXZD4keuKx2+cyy4LPDNq5rJzxFFisdzFSheziqkRTxHHVE2nfCHvscp5i7NWq7P2PfkLI0V9eYnrNEeRxgIWIUGEgjqqqMFGgladFAtZ2k/5+Edcv0QuhVxVMHLMYwMaZNcP/ge/u7VKkxNeUiQF9L44zkccCO0CrYbjfB87TusECD4DV3rHv9EEZj5Jb3S02BEwsA1cXHc0ZQ+43AGGnwzZlF0pSFMolYD3M/qmAjB0C/Ster2193H6AOSoq8wNcHAIjJUpe83n3eHu3v490+7vB5xzcrcCFsYUAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAB3RJTUUH6AcIEigcF6lCSwAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAABCSURBVCjPY2TABP+R2IwMeMB/fHwmBhIASYoZKXEzLreT54z/DBQCyp0xFBXjC4n/pAbZf5LCFpv4f2JtJDa6/wMAsxQRBVt+KBoAAAAASUVORK5CYII=';
 
-let story_data = {title:'Something Fishy',description:'A story about trying to do a fish romance.',author:'Joseppi007 (github) AKA Rose',pages:[{name:'Hello',text:'{scene:https://www.worldatlas.com/r/w1200/upload/04/ab/d1/fish-species-tropical.jpg}\n{scene_character(-0.9,0.9,BlubBlub):https://tse3.mm.bing.net/th?id=OIP.xXVVpcottGRlEH9vDdLPPwHaHM}\n{h1:???: HELLO!!!}\n{br}\n???: Who are you?\n{set:name}\n{br}\nBlub-blub: Hello {get:name}, I\'m Blub-blub.',next:[{name:'Hi Back',text:'“Hi.”'},{name:'Silent',text:'“…”'}],first:true},{name:'Hi Back',text:'{scene:https://www.worldatlas.com/r/w1200/upload/04/ab/d1/fish-species-tropical.jpg}\n{scene_character(-0.9,0.9,BlubBlub):https://tse3.mm.bing.net/th?id=OIP.xXVVpcottGRlEH9vDdLPPwHaHM}\n{get:name}: Hello.\n{br}\n{scene_rm}Ok, I\'ll let you make your own story now.',next:[],first:false},{name:'Silent',text:'{scene:https://www.worldatlas.com/r/w1200/upload/04/ab/d1/fish-species-tropical.jpg}\n{scene_character(-0.9,0.9,A):https://tse3.mm.bing.net/th?id=OIP.xXVVpcottGRlEH9vDdLPPwHaHM}\n{get:name}: …\n{br}\n{scene_rm}Ok, I\'ll let you make your own story now.',next:[],first:false}]};
+let story_data = {title:'Something Fishy',description:'A story about trying to do a fish romance.',author:'Joseppi007 (github) AKA Rose',pages:[{name:'Hello',text:'{scene:bg1}\n{scene_character(-0.9,0.9,BlubBlub):Blub-blub}\n{h1:???: HELLO!!!}\n{br}\n???: Who are you?\n{set:name}\n{br}\nBlub-blub: Hello {get:name}, I\'m Blub-blub.',next:[{name:'Hi Back',text:'“Hi.”'},{name:'Silent',text:'“…”'}],first:true},{name:'Hi Back',text:'{scene:bg1}\n{scene_character(-0.9,0.9,BlubBlub):Blub-blub}\n{get:name}: Hello.\n{br}\n{scene_rm}Ok, I\'ll let you make your own story now.',next:[],first:false},{name:'Silent',text:'{scene:bg1}\n{scene_character(-0.9,0.9,BlubBlub):Blub-blub}\n{get:name}: …\n{br}\n{scene_rm}Ok, I\'ll let you make your own story now.',next:[],first:false}],images:[{name:'bg1', link:'https://www.worldatlas.com/r/w1200/upload/04/ab/d1/fish-species-tropical.jpg'}, {name:'Blub-blub', link:'https://tse3.mm.bing.net/th?id=OIP.xXVVpcottGRlEH9vDdLPPwHaHM'}]};
 
 let special_story_data = {
-    help:{title:'The Guide',description:'This is a guide to help users in the creation of stories using this tool.',author:'Joseppi007 (github) AKA Rose',pages:[{name:'Start',text:'Seeing as this is a textual medium, I have decided to document this tool with itself.\nClick on a button below for what section of the guide you wish to read.\n{typeRate(0.5):Please note that clicking while the type effect is playing will speed it up greatly.}',next:[{name:'Reader Guide',text:'How do I read somebody\'s story?'}, {name:'GUI',text:'Where to go?'}, {name:'Formatting',text:'How to format?'}, {name:'Sharing',text:'How to share?'}],first:true},{name:'Reader Guide',text:'{h1:How to read a story.}\nTo read a story somebody wrote, you must first copy their JSON data. This could either be stored inside a JSON file or sent to you as a strange looking mess of brackets, colons and quotes with text all over the place. Once you have the text in your clipboard, click on the {b:File} button in the header of the web page, then replace all of the JSON text present in the large rectangle with what you have in your clipboard.\nClose the Pop-Up, then press {b:Play} in the header.\nThis may be made easier in the future, as I understand this is a lot more work than most would want.',next:[{name:'Start',text:'{i:Back}'}],first:false},{name:'GUI',text:'{h1:Where things are.}\nIf you wish to load a story you or somebody else has saved earlier or save the story you currently have, go to the {b:File} menu by clicking the button in the header. The esoteric text in the text box you will be presented with is the story, and saving this text somewhere will save the story. Copy/pasting it into that text box later will load the story back. Note that you {b:must} save the story you are working on in this way before closing the tab, as your story will be lost if the page is ever unloaded.\n\nIf you wish to read the story you have loaded, then select the {b:Play} button in the header.\nThe {b:Edit} menu can also be used if you wish to start from a page that is not the title page. Simply select the page from the list that appears, then select {i:Read From Here}.\n\nIf you wish to edit the story, click on the {b:Edit} button in the header. You should start with the {i:Title Page} to put yourself as the author and alike, but you do not need to if you prefer it that way. There will probably be some pages already present; you can click on them and select {i:Delete This Page} to remove them if you wish, otherwise you could simply edit the pages. The bottom of the page editor for each page will have a place to say which page(s) come next; the endings will have no next pages. Ensure that you select which page is your first page before you or anybody else reads it!',next:[{name:'Start',text:'{i:Back}'}],first:false},{name:'Formatting',text:'{h1:Formatting}{h3:From Bold and Italics to Graphics.}{hr}\nSuppose you wish to make some text {b:bold}. You can do this by writing \\{bold:{bold:Your Text Here}\\}. The formatting consists of curly braces on the left and right, a colon to seperate the type of formatting and the text to be formatted, and said type and text.\n\n\\{bold:example\\} → {bold:example}\n\\{italics:example\\} → {italics:example}\n\\{underline:example\\} → {underline:example}\n\n\\{h1:example\\} through \\{h6:example\\} are for headers, and appear as {h1:example}{h2:example}{h3:example}{h4:example}{h5:example}{h6:example}\n\\{hr\\} appears as a horizontal line as below: (Note that you do not need the colon if there is no inner text.){hr}\nIf you want something to type more {typeRate(2):slowly}, use \\{typeRate(2):example\\} to type with twice the delay between characters typed. Using a number less than one will cause the typing to happen faster.\n\nIf you want to, say, ask for the reader\'s name, you can use \\{set:name\\} to make one of these: {set:name}. Use \\{get:name\\} in order to say the name the reader typed.\n\nThere are multiple fonts that can be used, including \\{sans-serif:{sans-serif:sans-serif}\\}, \\{serif:{serif:serif}\\}, \\{monospace:{monospace:monospace}\\}, and \\{cursive:{cursive:cursive}\\}. There are also some Google fonts: \\{audiowide:{audiowide:audiowide}\\} and \\{anton sc:{anton sc:anton sc}\\}.\n\nIn order to end one section of a page to start a new one, type \\{br\\} to make a break. You can keep typing after it, but the reader will not see what comes next until they press an arrow button, and what was there before will no longer be visible. Here is what that looks like:{br}\nAs you can see, everything from before has been hidden, and this text is shown.\n\nBy the way, you typed {get:name} in the last input field. (I used \\{get:name\\} to figure that out.)\n\nIn the next section, I will discuss how to make a scene with a background and characters.{br}\n{scene:'+example_bg+'}\nIn order to make a scene, you need a link.\n\\{scene:{i:LINK}\\}\n{br}\nScenes persist between sections, but not pages. Recall that sections are seperated by \\{br\\} in a page.\n{br}\n{scene_remove}\\{scene_remove\\} can be used to remove the scene.\n{br}\n{scene:'+example_bg+'}{scene_character(0,0.5,Bob):'+example_character+'}While you have a scene, you can put characters in it. Again, you\'ll need a link, but you will also need to give the character a position on the scene and a name. This is in the form \\{scene_character({i:Horizontal Position}, {i:Vertical Position}, {i:Name}):{i:LINK}\\}. The horizontal position is a number between -1 and 1, where -1 is left and 1 is right. Vertical position goes between 0 and 1 where 0 is below the scene and 1 is in the scene. Everything in-between is semi-obscured by the bottom of the scene. The name will be used to move or alter the image of the character later. Names should be unique per character.\n{br}\nWithout using the link again, you can move an already placed character by using \\{scene_character({i:X}, {i:Y}, {i:Name})\\}.{scene_character(-1,1,Bob)}\n{br}\n{scene_remove_character(Bob)}\\{scene_remove_character({i:Name})\\} can be used to remove a character that is currently on screen.\n{br}\n{scene_remove}\n…and that\'s everything! I hope I covered everything well enough.',next:[{name:'Start',text:'{i:Back}'}],first:false},{name:'Sharing',text:'Open the {b:File} menu and send the JSON text to the recipient. This can be saved to a {i:.json} file, by the way. All the recipient needs to do is open this page and paste the JSON text into the text area.\n\nWhat is JSON?\nJSON is just a way for computers to store information. The stuff in the textarea in the {b:File} menu is JSON data.',next:[{name:'Start',text:'{i:Back}'}],first:false}]}
+    help:{title:'The Guide',description:'This is a guide to help users in the creation of stories using this tool.',author:'Joseppi007 (github) AKA Rose',pages:[{name:'Start',text:'Seeing as this is a textual medium, I have decided to document this tool with itself.\nClick on a button below for what section of the guide you wish to read.\n{typeRate(0.5):Please note that clicking while the type effect is playing will speed it up greatly.}',next:[{name:'Reader Guide',text:'How do I read somebody\'s story?'}, {name:'GUI',text:'Where to go?'}, {name:'Formatting',text:'How to format?'}, {name:'Sharing',text:'How to share?'}],first:true},{name:'Reader Guide',text:'{h1:How to read a story.}\nTo read a story somebody wrote, you must first copy their JSON data. This could either be stored inside a JSON file or sent to you as a strange looking mess of brackets, colons and quotes with text all over the place. Once you have the text in your clipboard, click on the {b:File} button in the header of the web page, then replace all of the JSON text present in the large rectangle with what you have in your clipboard.\nClose the Pop-Up, then press {b:Play} in the header.\nThis may be made easier in the future, as I understand this is a lot more work than most would want.',next:[{name:'Start',text:'{i:Back}'}],first:false},{name:'GUI',text:'{h1:Where things are.}\nIf you wish to load a story you or somebody else has saved earlier or save the story you currently have, go to the {b:File} menu by clicking the button in the header. The esoteric text in the text box you will be presented with is the story, and saving this text somewhere will save the story. Copy/pasting it into that text box later will load the story back. Note that you {b:must} save the story you are working on in this way before closing the tab, as your story will be lost if the page is ever unloaded.\n\nIf you wish to read the story you have loaded, then select the {b:Play} button in the header.\nThe {b:Edit} menu can also be used if you wish to start from a page that is not the title page. Simply select the page from the list that appears, then select {i:Read From Here}.\n\nIf you wish to edit the story, click on the {b:Edit} button in the header. You should start with the {i:Title Page} to put yourself as the author and alike, but you do not need to if you prefer it that way. There will probably be some pages already present; you can click on them and select {i:Delete This Page} to remove them if you wish, otherwise you could simply edit the pages. The bottom of the page editor for each page will have a place to say which page(s) come next; the endings will have no next pages. Ensure that you select which page is your first page before you or anybody else reads it!',next:[{name:'Start',text:'{i:Back}'}],first:false},{name:'Formatting',text:'{h1:Formatting}{h3:From Bold and Italics to Graphics.}{hr}\nSuppose you wish to make some text {b:bold}. You can do this by writing \\{bold:{bold:Your Text Here}\\}. The formatting consists of curly braces on the left and right, a colon to seperate the type of formatting and the text to be formatted, and said type and text.\n\n\\{bold:example\\} → {bold:example}\n\\{italics:example\\} → {italics:example}\n\\{underline:example\\} → {underline:example}\n\n\\{h1:example\\} through \\{h6:example\\} are for headers, and appear as {h1:example}{h2:example}{h3:example}{h4:example}{h5:example}{h6:example}\n\\{hr\\} appears as a horizontal line as below: (Note that you do not need the colon if there is no inner text.){hr}\nIf you want something to type more {typeRate(2):slowly}, use \\{typeRate(2):example\\} to type with twice the delay between characters typed. Using a number less than one will cause the typing to happen faster.\n\nIf you want to, say, ask for the reader\'s name, you can use \\{set:name\\} to make one of these: {set:name}. Use \\{get:name\\} in order to say the name the reader typed.\n\nThere are multiple fonts that can be used, including \\{sans-serif:{sans-serif:sans-serif}\\}, \\{serif:{serif:serif}\\}, \\{monospace:{monospace:monospace}\\}, and \\{cursive:{cursive:cursive}\\}. There are also some Google fonts: \\{audiowide:{audiowide:audiowide}\\} and \\{anton sc:{anton sc:anton sc}\\}.\n\nIn order to end one section of a page to start a new one, type \\{br\\} to make a break. You can keep typing after it, but the reader will not see what comes next until they press an arrow button, and what was there before will no longer be visible. Here is what that looks like:{br}\nAs you can see, everything from before has been hidden, and this text is shown.\n\nBy the way, you typed {get:name} in the last input field. (I used \\{get:name\\} to figure that out.)\n\nIn the next section, I will discuss how to make a scene with a background and characters.{br}\n{scene:example_bg}\nIn order to make a scene, you need a link.\n\\{scene:{i:LINK}\\}\n{br}\nScenes persist between sections, but not pages. Recall that sections are seperated by \\{br\\} in a page.\n{br}\n{scene_remove}\\{scene_remove\\} can be used to remove the scene.\n{br}\n{scene:example_bg}{scene_character(0,0.5,Bob):example_character}While you have a scene, you can put characters in it. Again, you\'ll need a link, but you will also need to give the character a position on the scene and a name. This is in the form \\{scene_character({i:Horizontal Position}, {i:Vertical Position}, {i:Name}):{i:LINK}\\}. The horizontal position is a number between -1 and 1, where -1 is left and 1 is right. Vertical position goes between 0 and 1 where 0 is below the scene and 1 is in the scene. Everything in-between is semi-obscured by the bottom of the scene. The name will be used to move or alter the image of the character later. Names should be unique per character.\n{br}\nWithout using the link again, you can move an already placed character by using \\{scene_character({i:X}, {i:Y}, {i:Name})\\}.{scene_character(-1,1,Bob)}\n{br}\n{scene_remove_character(Bob)}\\{scene_remove_character({i:Name})\\} can be used to remove a character that is currently on screen.\n{br}\n{scene_remove}\n…and that\'s everything! I hope I covered everything well enough.',next:[{name:'Start',text:'{i:Back}'}],first:false},{name:'Sharing',text:'Open the {b:File} menu and send the JSON text to the recipient. This can be saved to a {i:.json} file, by the way. All the recipient needs to do is open this page and paste the JSON text into the text area.\n\nWhat is JSON?\nJSON is just a way for computers to store information. The stuff in the textarea in the {b:File} menu is JSON data.',next:[{name:'Start',text:'{i:Back}'}],first:false}],images:[{name:'example-bg', link:example_bg}, {name:'example-character', link:example_character}]}
 };
 let story_vars = {};
 let scene_data = {bgImg: undefined, characters: []};
@@ -28,13 +28,13 @@ async function read_page(page_name, part = 0, used_story_data = story_data) {
     close_modals();
     story_modal.showModal();
     
-    await populateWithText(d, page.text, part, 1);
+    await populateWithText(d, page.text, part, 1, used_story_data.images);
     Array.from(story_footer.children).forEach(e=>e.remove());
     if (part == grabFormatTextPartCount(page.text) - 1) {
 	for (let i = 0; i < page.next.length; i++) {
 	    let btn = page.next[i];
 	    let button = document.createElement('button');
-	    await populateWithText(button, btn.text);
+	    await populateWithText(button, btn.text, 0, 1, used_story_data.images);
 	    button.onclick = ()=>{
 		scene_data.bgImg = undefined;
 		scene_data.characters = [];
@@ -68,9 +68,9 @@ async function read_title_page(part = 0, used_story_data = story_data) {
     close_modals();
     story_modal.showModal();
     
-    await populateWithText(titleH1, used_story_data.title);
-    await populateWithText(authorH3, "By "+used_story_data.author);
-    await populateWithText(descP, used_story_data.description);
+    await populateWithText(titleH1, used_story_data.title, 0, 1, used_story_data.images);
+    await populateWithText(authorH3, "By "+used_story_data.author, 0, 1, used_story_data.images);
+    await populateWithText(descP, used_story_data.description, 0, 1, used_story_data.images);
     story_div.innerText = "";
     story_div.appendChild(titleH1);
     story_div.appendChild(authorH3);
@@ -104,13 +104,13 @@ async function read_title_page(part = 0, used_story_data = story_data) {
     story_modal.showModal();
 }
 
-function populateWithText(domElem, text, part = 0, delayMultiplier = 1) {
-    return populateWithText_(domElem, removeTrailingWhitespace(grabFormatTextPart(text, part)), delayMultiplier);
+function populateWithText(domElem, text, part = 0, delayMultiplier = 1, imgList = []) {
+    return populateWithText_(domElem, removeTrailingWhitespace(grabFormatTextPart(text, part)), delayMultiplier, imgList);
 }
 
-async function populateWithText_(domElem, formatProcessedText, delayMultiplier = 1) {
+async function populateWithText_(domElem, formatProcessedText, delayMultiplier = 1, imgList = []) {
     domElem.innerText = "";
-    repopulateSceneDiv(domElem);
+    repopulateSceneDiv(domElem, imgList);
     for (let i = 0; i < formatProcessedText.length; i++) {
 	let piece = formatProcessedText[i];
 	if (typeof(piece) == "string") {
@@ -130,53 +130,53 @@ async function populateWithText_(domElem, formatProcessedText, delayMultiplier =
 	if (piece.type == "bold" || piece.type == "b" || piece.type == "strong") {
 	    let newElem = document.createElement("strong");
 	    domElem.appendChild(newElem);
-	    await populateWithText_(newElem, piece.kids, delayMultiplier);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier, imgList);
 	}
 	if (piece.type == "italics" || piece.type == "italic" || piece.type == "i" || piece.type == "it" || piece.type == "em") {
 	    let newElem = document.createElement("em");
 	    domElem.appendChild(newElem);
-	    await populateWithText_(newElem, piece.kids, delayMultiplier);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier, imgList);
 	}
 	if (piece.type == "underline" || piece.type == "uline" || piece.type == "under" || piece.type == "u") {
 	    let newElem = document.createElement("u");
 	    domElem.appendChild(newElem);
-	    await populateWithText_(newElem, piece.kids, delayMultiplier);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier, imgList);
 	}
 	if (piece.type == "h1") {
 	    let newElem = document.createElement("h1");
 	    domElem.appendChild(newElem);
-	    await populateWithText_(newElem, piece.kids, delayMultiplier);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier, imgList);
 	}
 	if (piece.type == "h2") {
 	    let newElem = document.createElement("h2");
 	    domElem.appendChild(newElem);
-	    await populateWithText_(newElem, piece.kids, delayMultiplier);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier, imgList);
 	}
 	if (piece.type == "h3") {
 	    let newElem = document.createElement("h3");
 	    domElem.appendChild(newElem);
-	    await populateWithText_(newElem, piece.kids, delayMultiplier);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier, imgList);
 	}
 	if (piece.type == "h4") {
 	    let newElem = document.createElement("h4");
 	    domElem.appendChild(newElem);
-	    await populateWithText_(newElem, piece.kids, delayMultiplier);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier, imgList);
 	}
 	if (piece.type == "h5") {
 	    let newElem = document.createElement("h5");
 	    domElem.appendChild(newElem);
-	    await populateWithText_(newElem, piece.kids, delayMultiplier);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier, imgList);
 	}
 	if (piece.type == "h6") {
 	    let newElem = document.createElement("h6");
 	    domElem.appendChild(newElem);
-	    await populateWithText_(newElem, piece.kids, delayMultiplier);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier, imgList);
 	}
 	if (piece.type.match(/typeRate\(\d*.?\d*\)/)) {
 	    let delayMultiplier1 = Number(piece.type.substr(9, piece.type.length-10));
 	    let newElem = document.createElement("span");
 	    domElem.appendChild(newElem);
-	    await populateWithText_(newElem, piece.kids, delayMultiplier*delayMultiplier1);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier*delayMultiplier1, imgList);
 	}
 	if (piece.type == "hr" || piece.type == "horizontal rule" || piece.type == "line" || piece.type == "--") {
 	    let newElem = document.createElement("hr");
@@ -192,7 +192,7 @@ async function populateWithText_(domElem, formatProcessedText, delayMultiplier =
 	if (piece.type == "get") {
 	    let newElem = document.createElement("span");
 	    domElem.appendChild(newElem);
-	    await populateWithText_(newElem, [story_vars[piece.kids]], delayMultiplier);
+	    await populateWithText_(newElem, [story_vars[piece.kids]], delayMultiplier, imgList);
 	    continue;
 	}
 	if (piece.type == "set") {
@@ -207,7 +207,7 @@ async function populateWithText_(domElem, formatProcessedText, delayMultiplier =
 	}
 	if (piece.type == "scene" || piece.type == "scene_background" || piece.type == "scene_bg") {
 	    scene_data.bgImg = piece.kids[0];
-	    repopulateSceneDiv(domElem);
+	    repopulateSceneDiv(domElem, imgList);
 	    continue;
 	}
 	let match = piece.type.match(/scene_character\((-?\d*.?\d*)\, ?(-?\d*.?\d*)\, ?([^,]*)\)/);
@@ -239,63 +239,63 @@ async function populateWithText_(domElem, formatProcessedText, delayMultiplier =
 		    return character;
 		});
 	    }
-	    repopulateSceneDiv(domElem);
+	    repopulateSceneDiv(domElem, imgList);
 	    continue;
 	}
 	if (piece.type == "scene_remove" || piece.type == "scene_delete" || piece.type == "scene_del" || piece.type == "scene_rm") {
 	    scene_data.bgImg = undefined;
 	    scene_data.characters = [];
-	    repopulateSceneDiv(domElem);
+	    repopulateSceneDiv(domElem, imgList);
 	    continue;
 	}
 	match = piece.type.match(/scene_(?:remove|delete|rm|del)_character\(([^,]*)\)/);
 	if (match) {
 	    let name = match[1];
 	    scene_data.characters = scene_data.characters.filter(character=>character.name!=name);
-	    repopulateSceneDiv(domElem);
+	    repopulateSceneDiv(domElem, imgList);
 	    continue;
 	}
 	if (piece.type == "sans" || piece.type == "sans-serif") {
 	    let newElem = document.createElement("span");
 	    newElem.classList.add("sans");
 	    domElem.appendChild(newElem);
-	    await populateWithText_(newElem, piece.kids, delayMultiplier);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier, imgList);
 	}
 	if (piece.type == "serif") {
 	    let newElem = document.createElement("span");
 	    newElem.classList.add("serif");
 	    domElem.appendChild(newElem);
-	    await populateWithText_(newElem, piece.kids, delayMultiplier);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier, imgList);
 	}
 	if (piece.type == "mono" || piece.type == "monospace") {
 	    let newElem = document.createElement("span");
 	    newElem.classList.add("mono");
 	    domElem.appendChild(newElem);
-	    await populateWithText_(newElem, piece.kids, delayMultiplier);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier, imgList);
 	}
 	if (piece.type == "cursive") {
 	    let newElem = document.createElement("span");
 	    newElem.classList.add("cursive");
 	    domElem.appendChild(newElem);
-	    await populateWithText_(newElem, piece.kids, delayMultiplier);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier, imgList);
 	}
 	if (piece.type == "fantasy") {
 	    let newElem = document.createElement("span");
 	    newElem.classList.add("fantasy");
 	    domElem.appendChild(newElem);
-	    await populateWithText_(newElem, piece.kids, delayMultiplier);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier, imgList);
 	}
 	if (piece.type == "audiowide") {
 	    let newElem = document.createElement("span");
 	    newElem.classList.add("audiowide");
 	    domElem.appendChild(newElem);
-	    await populateWithText_(newElem, piece.kids, delayMultiplier);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier, imgList);
 	}
 	if (piece.type == "anton sc") {
 	    let newElem = document.createElement("span");
 	    newElem.classList.add("anton-sc");
 	    domElem.appendChild(newElem);
-	    await populateWithText_(newElem, piece.kids, delayMultiplier);
+	    await populateWithText_(newElem, piece.kids, delayMultiplier, imgList);
 	}
     }
 }
@@ -313,7 +313,7 @@ async function populateWithPlainText(domElem, text, delaydelayMultiplier) {
 }
 
 // TODO
-function repopulateSceneDiv(baseDomElem) {
+function repopulateSceneDiv(baseDomElem, imgList = []) {
     if (scene_data.bgImg != undefined) {
 	if (!document.getElementById("scene_div_div")) {
 	    let newElem0 = document.createElement("div");
@@ -321,7 +321,7 @@ function repopulateSceneDiv(baseDomElem) {
 	    newElem0.id = "scene_div_div";
 	    baseDomElem.prepend(newElem0);
 	    let newElem1 = document.createElement("div");
-	    newElem1.style = "aspect-ratio: 16 / 9; height: 100%; margin: auto; background-image: url("+scene_data.bgImg+"); overflow: hidden; background-repeat: no-repeat; background-size: 100% 100%; position: relative;";
+	    newElem1.style = "aspect-ratio: 16 / 9; height: 100%; margin: auto; background-image: url("+(imgList.filter(e=>e.name == scene_data.bgImg)[0] || {link: example_bg}).link+"); overflow: hidden; background-repeat: no-repeat; background-size: 100% 100%; position: relative;";
 	    newElem1.id = "scene_div";
 	    newElem0.appendChild(newElem1);
 	}
@@ -333,7 +333,7 @@ function repopulateSceneDiv(baseDomElem) {
 		domElem.style = "aspect-ratio: 9 / 16; height: 100%; position: absolute; background-repeat: no-repeat; background-size: 100% 100%;";
 		document.getElementById("scene_div").appendChild(domElem);
 	    }
-	    domElem.style.backgroundImage = "url("+((character.img == undefined)?example_character:character.img)+")";
+	    domElem.style.backgroundImage = "url("+(imgList.filter(e=>e.name == character.img)[0] || {link: example_character}).link+")";
 	    domElem.style.left = 68.359375*(((character.x == undefined)?0:character.x)/2+0.5)+"%";
 	    domElem.style.top = 100*(1-((character.y == undefined)?0.75:character.y))+"%";
 	});
