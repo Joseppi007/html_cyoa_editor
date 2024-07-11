@@ -94,7 +94,7 @@
     <dialog aria-modal="true" id="image_links_edit_modal">
       <button class="close" onclick="image_links_edit_modal.close();">&times;</button>
       <h1>Image Links</h1>
-      <p>Please format the image links as <i>Reference Name</i>:<i>Link</i><br/>The reference name is used when making scenes or placing characters in scenes.</p>
+      <p>Please format the image links as <i>Reference Name</i>:<i>Link</i> with each link on its own line.<br/>The reference name is used when making scenes or placing characters in scenes, like {scene:<i>Reference</i>} or {scene_character(<i>Horizontal Position</i>, <i>Vertical Position</i>, <i>Name</i>):<i>Reference</i>}</p>
       <textarea id="image_links_edit_input" onchange="save_edit_image_links(this.value);" style="width:90%;height:50%;"></textarea>
     </dialog>
     <script>figure_out_theme();</script>
