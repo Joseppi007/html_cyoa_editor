@@ -22,7 +22,7 @@
       <h1>File</h1>
       <p>Save your story to a <span class="mono">.JSON</span> file or load a <span class="mono">.JSON</span> file.<br/>I thought about having a whole file manipulation piece of code, but then I remembered you can probably just copy/paste from the below textarea.</p>
       <textarea id="story_data_json" onchange="story_data=JSON.parse(this.value);update_custom_theme();" style="width:90%;height:50%;"></textarea><br/>
-      <button class="danger" onclick="story_data={title:'',author:'',description:'',pages:[],images:[],custom_theme:Array(20).fill(false).map(random_color)};story_data_json.value=JSON.stringify(story_data);">New Story</button>
+      <button class="danger" onclick="story_data={title:'',author:'',description:'',pages:[],images:[],custom_theme:example_custom_theme.map(e=>e)};">New Story</button>
     </dialog>
     <dialog aria-modal="true" id="story_modal" class="hidden-overflow" onmousedown="baseDelay=0;" onmouseup="baseDelay=baseBaseDelay;" ontouchstart="baseDelay=0;" ontouchend="baseDelay=baseBaseDelay;">
       <button class="close" onclick="story_modal.close();">&times;</button>
