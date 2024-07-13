@@ -21,7 +21,8 @@
       <button class="close" onclick="file_menu.close();">&times;</button>
       <h1>File</h1>
       <p>Save your story to a <span class="mono">.JSON</span> file or load a <span class="mono">.JSON</span> file.<br/>I thought about having a whole file manipulation piece of code, but then I remembered you can probably just copy/paste from the below textarea.</p>
-      <textarea id="story_data_json" onchange="story_data=JSON.parse(this.value);" style="width:90%;height:50%;"></textarea>
+      <textarea id="story_data_json" onchange="story_data=JSON.parse(this.value);" style="width:90%;height:50%;"></textarea><br/>
+      <button class="danger" onclick="story_data={title:'',author:'',description:'',pages:[],images:[]};story_data_json.value=JSON.stringify(story_data);">New Story</button>
     </dialog>
     <dialog aria-modal="true" id="story_modal" class="hidden-overflow" onmousedown="baseDelay=0;" onmouseup="baseDelay=baseBaseDelay;" ontouchstart="baseDelay=0;" ontouchend="baseDelay=baseBaseDelay;">
       <button class="close" onclick="story_modal.close();">&times;</button>
@@ -87,6 +88,7 @@
 	<button onclick="figure_out_theme('dark');">Dark Mode</button><br/>
 	<button onclick="figure_out_theme('high contrast');">High Contrast Mode</button><br/>
 	<button onclick="figure_out_theme('haxor');" class="audiowide">H4X0R Mode</button><br/>
+	<button onclick="figure_out_theme('custom');">Custom Mode <span style="font-size: 0.75em">(Usually Recommended.)</span></button><br/>
 	<input type="checkbox" onclick="if(this.checked){baseBaseDelay=10;}else{baseBaseDelay=0;}baseDelay=baseBaseDelay;" id="type_effect_check_box"><label>Type Effect</label>
 	<script>if(type_effect_check_box.checked){baseBaseDelay=10;}else{baseBaseDelay=0;}baseDelay=baseBaseDelay;</script>
       </div>

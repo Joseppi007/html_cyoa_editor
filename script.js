@@ -189,13 +189,13 @@ async function populateWithText_(domElem, formatProcessedText, delayMultiplier =
 	if (piece.type == "br" || piece.type == "break") {
 	    // Shouldn't show up, actually…
 	}
-	if (piece.type == "get") {
+	if (piece.type == "get" || piece.type == "input") {
 	    let newElem = document.createElement("span");
 	    domElem.appendChild(newElem);
 	    await populateWithText_(newElem, [story_vars[piece.kids]], delayMultiplier, imgList);
 	    continue;
 	}
-	if (piece.type == "set") {
+	if (piece.type == "set" || piece.type == "output") {
 	    let newElem = document.createElement("input");
 	    domElem.appendChild(newElem);
 	    newElem.onchange = (event) => {
@@ -205,12 +205,12 @@ async function populateWithText_(domElem, formatProcessedText, delayMultiplier =
 	    newElem.value = story_vars[piece.kids];
 	    continue;
 	}
-	if (piece.type == "scene" || piece.type == "scene_background" || piece.type == "scene_bg") {
+	if (piece.type == "scene" || piece.type == "scene_background" || piece.type == "scene_bg" || piece.type == "s" || piece.type == "sb") {
 	    scene_data.bgImg = piece.kids[0];
 	    repopulateSceneDiv(domElem, imgList);
 	    continue;
 	}
-	let match = piece.type.match(/scene_character\((-?\d*.?\d*)\, ?(-?\d*.?\d*)\, ?([^,]*)\)/);
+	let match = piece.type.match(/(?:scene_character|sc|c|char|character)\((-?\d*.?\d*)\, ?(-?\d*.?\d*)\, ?([^,]*)\)/);
 	if (match) {
 	    let x = match[1];
 	    x = Number(x);
@@ -242,13 +242,13 @@ async function populateWithText_(domElem, formatProcessedText, delayMultiplier =
 	    repopulateSceneDiv(domElem, imgList);
 	    continue;
 	}
-	if (piece.type == "scene_remove" || piece.type == "scene_delete" || piece.type == "scene_del" || piece.type == "scene_rm") {
+	if (piece.type == "scene_remove" || piece.type == "scene_delete" || piece.type == "scene_del" || piece.type == "scene_rm" || piece.type == "sr" || piece.type == "sd") {
 	    scene_data.bgImg = undefined;
 	    scene_data.characters = [];
 	    repopulateSceneDiv(domElem, imgList);
 	    continue;
 	}
-	match = piece.type.match(/scene_(?:remove|delete|rm|del)_character\(([^,]*)\)/);
+	match = piece.type.match(/(?:(?:scene_)?(?:remove|delete|rm|del)_(?:character|char|c)|s?rc|s?dc)\(([^,]*)\)/);
 	if (match) {
 	    let name = match[1];
 	    scene_data.characters = scene_data.characters.filter(character=>character.name!=name);
@@ -358,6 +358,7 @@ function repopulateSceneDiv(baseDomElem, imgList = []) {
 }
 
 function removeTrailingWhitespace(formattedText) {
+    let sceneStuff = [/scene|scene_background|scene_bg|s|sb/, /(?:scene_character|sc|c|char|character)\(.*\)/, /scene_remove|scene_delete|scene_del|scene_rm|sr|sd/, /(?:(?:scene_)?(?:remove|delete|rm|del)_(?:character|char|c)|s?rc|s?dc)\(.*\)/];
     let inWhiteSpacePart = true;
     let ft = formattedText.filter((part)=>{
 	if (typeof(part) == 'string') {
@@ -368,7 +369,7 @@ function removeTrailingWhitespace(formattedText) {
 	    inWhiteSpacePart = false;
 	    return true;
 	}
-	if (part.type.substring(0,5) == 'scene') {
+	if (sceneStuff.map(e=>part.type.match(e)==part.type).includes(true)) {
 	    return true;
 	}
 	if (part.type != 'newLine') {
@@ -388,7 +389,7 @@ function removeTrailingWhitespace(formattedText) {
 	    inWhiteSpacePart = false;
 	    return true;
 	}
-	if (part.type.substring(0,5) == 'scene') {
+	if (sceneStuff.map(e=>part.type.match(e)==part.type).includes(true)) {
 	    return true;
 	}
 	if (part.type != 'newLine') {
@@ -683,17 +684,21 @@ function figure_out_theme(theme = args.theme) {
     document.body.classList.remove("light-mode");
     document.body.classList.remove("high-contrast-mode");
     document.body.classList.remove("haxor-mode");
+    document.body.classList.remove("custom-mode");
     if (theme == 'l' || theme == 'light' || theme == 'light mode') {
 	document.body.classList.add("light-mode");
     }
     if (theme == 'd' || theme == 'dark' || theme == 'dark mode') {
 	document.body.classList.add("dark-mode");
     }
-    if (theme == 'hc' || theme == 'high contrast' || theme == 'contrast') {
+    if (theme == 'hc' || theme == 'high contrast' || theme == 'contrast' || theme == 'high contrast mode') {
 	document.body.classList.add("high-contrast-mode");
     }
-    if (theme == 'h' || theme == 'haxor' || theme == 'h4x0r') {
+    if (theme == 'h' || theme == 'haxor' || theme == 'h4x0r' || theme == 'haxor mode' || theme == 'h4x0r m0d3') {
 	document.body.classList.add("haxor-mode");
+    }
+    if (theme == 'c' || theme == 'custom' || theme == 'custom mode') {
+	document.body.classList.add("custom-mode");
     }
 }
 

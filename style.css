@@ -83,6 +83,27 @@
     --haxor-ta-fg: #0f0;
     --haxor-header-bg: #000;
 
+    --custom-main-bg: #fff;
+    --custom-main-fg: #000;
+    --custom-primary-bg: #fff;
+    --custom-primary-fg: #d00;
+    --custom-secondary-bg: #fff;
+    --custom-secondary-fg: #080;
+    --custom-tertiary-bg: #fff;
+    --custom-tertiary-fg: #00f;
+    --custom-transparent: #fffa;
+    --custom-close-bg: #f00;
+    --custom-close-fg: #000;
+    --custom-close2-bg: #f00;
+    --custom-close2-fg: #000;
+    --custom-close3-bg: #f00;
+    --custom-close3-fg: #000;
+    --custom-contrast-bg: #000;
+    --custom-contrast-fg: #fff;
+    --custom-ta-bg: #fff;
+    --custom-ta-fg: #000;
+    --custom-header-bg: #000;
+
     --main-bg: var(--light-main-bg);
     --main-fg: var(--light-main-fg);
     --primary-bg: var(--light-primary-bg);
@@ -204,6 +225,29 @@ body.haxor-mode {
     font-family: "Audiowide", sans-serif;
     font-weight: 400;
     font-style: normal;
+}
+
+body.custom-mode {
+    --main-bg: var(--custom-main-bg);
+    --main-fg: var(--custom-main-fg);
+    --primary-bg: var(--custom-primary-bg);
+    --primary-fg: var(--custom-primary-fg);
+    --secondary-bg: var(--custom-secondary-bg);
+    --secondary-fg: var(--custom-secondary-fg);
+    --tertiary-bg: var(--custom-tertiary-bg);
+    --tertiary-fg: var(--custom-tertiary-fg);
+    --transparent: var(--custom-transparent);
+    --close-bg: var(--custom-close-bg);
+    --close-fg: var(--custom-close-fg);
+    --close2-bg: var(--custom-close2-bg);
+    --close2-fg: var(--custom-close2-fg);
+    --close3-bg: var(--custom-close3-bg);
+    --close3-fg: var(--custom-close3-fg);
+    --contrast-bg: var(--custom-contrast-bg);
+    --contrast-fg: var(--custom-contrast-fg);
+    --ta-bg: var(--custom-ta-bg);
+    --ta-fg: var(--custom-ta-fg);
+    --header-bg: var(--custom-header-bg);
 }
 
 body {
