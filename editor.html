@@ -99,30 +99,81 @@
       <p>Please format the image links as <i>Reference Name</i>:<i>Link</i> with each link on its own line.<br/>The reference name is used when making scenes or placing characters in scenes, like {scene:<i>Reference</i>} or {scene_character(<i>Horizontal Position</i>, <i>Vertical Position</i>, <i>Name</i>):<i>Reference</i>}</p>
       <textarea id="image_links_edit_input" onchange="save_edit_image_links(this.value);" style="width:90%;height:50%;"></textarea>
     </dialog>
-    <dialog aria-modal="true" id="custom_theme_edit_modal">
+    <dialog aria-modal="true" id="custom_theme_edit_modal" style="overflow: hidden;">
       <button class="close" onclick="custom_theme_edit_modal.close();">&times;</button>
-      <h1>Custom Theme</h1>
-      <p>There are a lot of colors here, and I'll let you change all of them.</p>
-      <input type="color" id="custom_theme_color0"  onchange="story_data.custom_theme[0]=this.value;  update_custom_theme();"/> Main Background<br/>
-      <input type="color" id="custom_theme_color1"  onchange="story_data.custom_theme[1]=this.value;  update_custom_theme();"/> Main Foreground<br/>
-      <input type="color" id="custom_theme_color2"  onchange="story_data.custom_theme[2]=this.value;  update_custom_theme();"/> Element Primary Background<br/>
-      <input type="color" id="custom_theme_color3"  onchange="story_data.custom_theme[3]=this.value;  update_custom_theme();"/> Element Primary Foreground<br/>
-      <input type="color" id="custom_theme_color4"  onchange="story_data.custom_theme[4]=this.value;  update_custom_theme();"/> Element Hover Background<br/>
-      <input type="color" id="custom_theme_color5"  onchange="story_data.custom_theme[5]=this.value;  update_custom_theme();"/> Element Hover Foreground<br/>
-      <input type="color" id="custom_theme_color6"  onchange="story_data.custom_theme[6]=this.value;  update_custom_theme();"/> Element Active Background<br/>
-      <input type="color" id="custom_theme_color7"  onchange="story_data.custom_theme[7]=this.value;  update_custom_theme();"/> Element Active Foreground<br/>
-      <input type="color" id="custom_theme_color8"  onchange="story_data.custom_theme[8]=this.value;  update_custom_theme();"/> Color Behind Popups<br/>
-      <input type="color" id="custom_theme_color9"  onchange="story_data.custom_theme[9]=this.value;  update_custom_theme();"/> Close/Danger Primary Background<br/>
-      <input type="color" id="custom_theme_color10" onchange="story_data.custom_theme[10]=this.value; update_custom_theme();"/> Close/Danger Primary Foreground<br/>
-      <input type="color" id="custom_theme_color11" onchange="story_data.custom_theme[11]=this.value; update_custom_theme();"/> Close/Danger Hover Background<br/>
-      <input type="color" id="custom_theme_color12" onchange="story_data.custom_theme[12]=this.value; update_custom_theme();"/> Close/Danger Hover Foreground<br/>
-      <input type="color" id="custom_theme_color13" onchange="story_data.custom_theme[13]=this.value; update_custom_theme();"/> Close/Danger Active Background<br/>
-      <input type="color" id="custom_theme_color14" onchange="story_data.custom_theme[14]=this.value; update_custom_theme();"/> Close/Danger Active Foreground<br/>
-      <input type="color" id="custom_theme_color15" onchange="story_data.custom_theme[15]=this.value; update_custom_theme();"/> Highlight Background<br/>
-      <input type="color" id="custom_theme_color16" onchange="story_data.custom_theme[16]=this.value; update_custom_theme();"/> Highlight Foreground<br/>
-      <input type="color" id="custom_theme_color17" onchange="story_data.custom_theme[17]=this.value; update_custom_theme();"/> Text Area Background<br/>
-      <input type="color" id="custom_theme_color18" onchange="story_data.custom_theme[18]=this.value; update_custom_theme();"/> Text Area Foreground<br/>
-      <input type="color" id="custom_theme_color19" onchange="story_data.custom_theme[19]=this.value; update_custom_theme();"/> Header/Footer Background<br/>
+      <div style="height: calc(100% - 3em); width: calc(100% - 2em); overflow: scroll;">
+	<h1>Custom Theme</h1>
+	<p>There are a lot of colors here, and I'll let you change all of them.</p>
+	<table>
+	  <tr>
+	    <th></th>
+	    <th>Background</th>
+	    <th>Foreground</th>
+	  </tr>
+	  <tr>
+	    <td>Regular text on the page</td>
+	    <td><input type="color" id="custom_theme_color0"  onchange="story_data.custom_theme[0]=this.value;  update_custom_theme();"/></td>
+	    <td><input type="color" id="custom_theme_color1"  onchange="story_data.custom_theme[1]=this.value;  update_custom_theme();"/></td>
+	  </tr>
+	  <tr>
+	    <td>Buttons & Alike</td>
+	    <td><input type="color" id="custom_theme_color2"  onchange="story_data.custom_theme[2]=this.value;  update_custom_theme();"/></td>
+	    <td><input type="color" id="custom_theme_color3"  onchange="story_data.custom_theme[3]=this.value;  update_custom_theme();"/></td>
+	  </tr>
+	  <tr>
+	    <td>Buttons & Alike (hover)</td>
+	    <td><input type="color" id="custom_theme_color4"  onchange="story_data.custom_theme[4]=this.value;  update_custom_theme();"/></td>
+	    <td><input type="color" id="custom_theme_color5"  onchange="story_data.custom_theme[5]=this.value;  update_custom_theme();"/></td>
+	  </tr>
+	  <tr>
+	    <td>Buttons & Alike (active/clicking)</td>
+	    <td><input type="color" id="custom_theme_color6"  onchange="story_data.custom_theme[6]=this.value;  update_custom_theme();"/></td>
+	    <td><input type="color" id="custom_theme_color7"  onchange="story_data.custom_theme[7]=this.value;  update_custom_theme();"/></td>
+	  </tr>
+	  <tr>
+	    <td>Color Behind Popups</td>
+	    <td><input type="color" id="custom_theme_color8"  onchange="story_data.custom_theme[8]=this.value;  update_custom_theme();"/></td>
+	    <td></td>
+	  </tr>
+	  <tr>
+	    <td>Close/Danger Buttons</td>
+	    <td><input type="color" id="custom_theme_color9"  onchange="story_data.custom_theme[9]=this.value;  update_custom_theme();"/></td>
+	    <td><input type="color" id="custom_theme_color10" onchange="story_data.custom_theme[10]=this.value; update_custom_theme();"/></td>
+	  </tr>
+	  <tr>
+	    <td>Close/Danger Buttons (hover)</td>
+	    <td><input type="color" id="custom_theme_color11" onchange="story_data.custom_theme[11]=this.value; update_custom_theme();"/></td>
+	    <td><input type="color" id="custom_theme_color12" onchange="story_data.custom_theme[12]=this.value; update_custom_theme();"/></td>
+	  </tr>
+	  <tr>
+	    <td>Close/Danger Buttons (active/clicking)</td>
+	    <td><input type="color" id="custom_theme_color13" onchange="story_data.custom_theme[13]=this.value; update_custom_theme();"/></td>
+	    <td><input type="color" id="custom_theme_color14" onchange="story_data.custom_theme[14]=this.value; update_custom_theme();"/></td>
+	  </tr>
+	  <tr>
+	    <td>Highlighted/Selected Text (by user)</td>
+	    <td><input type="color" id="custom_theme_color15" onchange="story_data.custom_theme[15]=this.value; update_custom_theme();"/></td>
+	    <td><input type="color" id="custom_theme_color16" onchange="story_data.custom_theme[16]=this.value; update_custom_theme();"/></td>
+	  </tr>
+	  <tr>
+	    <td>Textareas</td>
+	    <td><input type="color" id="custom_theme_color17" onchange="story_data.custom_theme[17]=this.value; update_custom_theme();"/></td>
+	    <td><input type="color" id="custom_theme_color18" onchange="story_data.custom_theme[18]=this.value; update_custom_theme();"/></td>
+	  </tr>
+	  <tr>
+	    <td>Header/Footer Background</td>
+	    <td><input type="color" id="custom_theme_color19" onchange="story_data.custom_theme[19]=this.value; update_custom_theme();"/></td>
+	    <td></td>
+	  </tr>
+	</table>
+	<hr/>
+	<p>This is some example text. The buttons below are examples as well. Please make sure to select this text as though you will copy it—notice that the highlight background and forground will be applied to what you highlight.</p>
+      </div>
+      <div class="footer" style="font-size: 1.2em; padding: 0px; margin: 0px;">
+	<div id="custom_theme_footer">
+	  <button>These</button><button>Do</button><button class="danger" style="font-size: 1em;">Nothing</button>
+	</div>
+      </div>
     </dialog>
     <script>figure_out_theme();</script>
   </body>
