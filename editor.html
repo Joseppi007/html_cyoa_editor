@@ -25,7 +25,7 @@
       <button class="danger" onclick="story_data={title:'',author:'',description:'',pages:[],images:[],custom_theme:example_custom_theme.map(e=>e)};">New Story</button>
     </dialog>
     <dialog aria-modal="true" id="story_modal" class="hidden-overflow" onmousedown="baseDelay=0;" onmouseup="baseDelay=baseBaseDelay;" ontouchstart="baseDelay=0;" ontouchend="baseDelay=baseBaseDelay;">
-      <button class="close" onclick="story_modal.close();">&times;</button>
+      <button class="close" onclick="story_modal.close(); scene_data.bgImg = undefined; scene_data.characters = [];">&times;</button>
       <div id="story_div" class="scroll-overflow" style="height: calc(100% - 3em); width: calc(100% - 2em);">
 	This is a placeholder.
       </div>
@@ -69,6 +69,7 @@
 	<p>Option buttons, formatted as:<br/><span class="mono">Page Name:Option Text,Page Name:Option Text</span><br/>…or in other words, each option is seperated by a comma, and the options are divided into two pieces: The page it goes to and the text displayed for the option. These parts are seperated by a colon.</p>
 	<textarea id="page_buttons_input" style="width:90%;" onchange="save_edit();"></textarea></br>
 	<!--<button onclick="save_edit();">Save Changes</button>-->
+	<button onclick="read_page(this.page, 0, this.story_data, [/edit_modal/]);" id="edit_modal_preview_button">Preview Page</button>
       </div>
     </dialog>
     <dialog aria-modal="true" id="title_edit_modal" class="hidden-overflow">

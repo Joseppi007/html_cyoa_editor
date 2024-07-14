@@ -3,7 +3,7 @@ let selected_page = "No page selected";
 
 let example_bg = 'data:image/svg+xml;utf8,<svg width="1600" height="900" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect fill="%230088ff" x="0" y="0" width="1600" height="900"/><path d="M0 700 c100 -100 1500 -100 1600 0 v200 h-1600 Z" fill="%2300ee66"/><ellipse cx="1500" cy="100" rx="200" ry="200" fill="%23ffff00"/><ellipse cx="500" cy="200" rx="100" ry="100" fill="%23ffffff"/><ellipse cx="600" cy="200" rx="100" ry="100" fill="%23ffffff"/><ellipse cx="550" cy="225" rx="200" ry="80" fill="%23ffffff"/></svg>';
 let example_character = 'data:image/svg+xml;utf8,<svg width="900" height="1600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path stroke="%23000000" stroke-width="50" fill="%2300000000" d="M0 1600 l450 -600 l450 600"/><path stroke="%23000000" stroke-width="50" fill="%2300000000" d="M450 1000 v-600"/><path stroke="%23000000" stroke-width="50" fill="%2300000000" d="M0 500 h900"/><ellipse stroke="%23000000" stroke-width="50" fill="%2300000000" cx="450" cy="200" rx="200" ry="200"/></svg>';
-let example_custom_theme = ['#99c1f1','#180d80','#8ff0a4','#0a4f21','#8ff0a4','#0a4f21','#8ff0a4','#0a4f21','#000000','#f66151','#5e0505','#f66151','#5e0505','#f66151','#5e0505','#000000','#ffffff','#ffffff','#000000','#62a0ea']
+let example_custom_theme = ['#99c1f1','#180d80','#8ff0a4','#0a4f21','#8ff0a4','#0a4f21','#8ff0a4','#0a4f21','#000000aa','#f66151','#5e0505','#f66151','#5e0505','#f66151','#5e0505','#000000','#ffffff','#ffffff','#000000','#62a0ea']
 
 let story_data = {title:'Something Fishy',description:'A story about trying to do a fish romance.',author:'Rose (github: Joseppi007) (discord: @jono_0) (gmail: joeynovack314@gmail.com)',pages:[{name:'Hello',text:'{scene:bg1}\n{scene_character(-0.9,0.9,BlubBlub):Blub-blub}\n{h1:???: HELLO!!!}\n{br}\n???: Who are you?\n{set:name}\n{br}\nBlub-blub: Hello {get:name}, I\'m Blub-blub.',next:[{name:'Hi Back',text:'“Hi.”'},{name:'Silent',text:'“…”'}],first:true},{name:'Hi Back',text:'{scene:bg1}\n{scene_character(-0.9,0.9,BlubBlub):Blub-blub}\n{get:name}: Hello.\n{br}\n{scene_rm}Ok, I\'ll let you make your own story now.',next:[],first:false},{name:'Silent',text:'{scene:bg1}\n{scene_character(-0.9,0.9,BlubBlub):Blub-blub}\n{get:name}: …\n{br}\n{scene_rm}Ok, I\'ll let you make your own story now.',next:[],first:false}],images:[{name:'bg1', link:'https://www.worldatlas.com/r/w1200/upload/04/ab/d1/fish-species-tropical.jpg'}, {name:'Blub-blub', link:'https://tse3.mm.bing.net/th?id=OIP.xXVVpcottGRlEH9vDdLPPwHaHM'}],custom_theme:example_custom_theme.map(e=>e)};
 
@@ -19,14 +19,14 @@ function story_start(used_story_data = story_data) {
     read_title_page(0, used_story_data);
 }
 
-async function read_page(page_name, part = 0, used_story_data = story_data) {
+async function read_page(page_name, part = 0, used_story_data = story_data, keep_modals_list = []) {
     let page = get_page(page_name, used_story_data);
     let d = document.createElement('div');
     story_div.innerText = "";
     story_div.appendChild(d);
     story_footer.innerText = "";
 
-    close_modals();
+    close_modals(keep_modals_list);
     story_modal.showModal();
     
     await populateWithText(d, page.text, part, 1, used_story_data.images);
@@ -39,7 +39,7 @@ async function read_page(page_name, part = 0, used_story_data = story_data) {
 	    button.onclick = ()=>{
 		scene_data.bgImg = undefined;
 		scene_data.characters = [];
-		read_page(btn.name, 0, used_story_data);
+		read_page(btn.name, 0, used_story_data, keep_modals_list);
 	    };
 	    story_footer.appendChild(button);
 	};
@@ -47,13 +47,13 @@ async function read_page(page_name, part = 0, used_story_data = story_data) {
 	let button = document.createElement('button');
 	button.innerText = '→';
 	button.onclick = ()=>{
-	    read_page(page_name, part+1, used_story_data);
+	    read_page(page_name, part+1, used_story_data, keep_modals_list);
 	};
 	story_footer.appendChild(button);
     }
 }
 
-async function read_title_page(part = 0, used_story_data = story_data) {
+async function read_title_page(part = 0, used_story_data = story_data, keep_modals_list = []) {
     story_div.innerText = "";
     story_footer.innerText = "";
     scene_data.bgImg = undefined;
@@ -67,7 +67,7 @@ async function read_title_page(part = 0, used_story_data = story_data) {
     story_div.appendChild(authorH3);
     story_div.appendChild(descP);
     
-    close_modals();
+    close_modals(keep_modals_list);
     story_modal.showModal();
     
     await populateWithText(titleH1, used_story_data.title, 0, 1, used_story_data.images);
@@ -583,10 +583,11 @@ function open_page_options_menu(page_name) {
     page_options_modal.showModal();
 }
 
-function open_title_page_options_menu() {
+function open_title_page_options_menu(used_story_data = story_data) {
     title_page_title_input.value = story_data.title;
     title_page_author_input.value = story_data.author;
     title_page_description_input.value = story_data.description;
+    title_edit_modal.story_data = used_story_data;
     close_modals();
     title_edit_modal.showModal();
 }
@@ -649,13 +650,17 @@ function delete_page(page_name, used_story_data = story_data) {
     story_data.pages = used_story_data.pages.filter(page=>page.name!=page_name);
 }
 
-function edit_page(page_name) {
-    let page = get_page(page_name);
+function edit_page(page_name, used_story_data = story_data) {
+    let page = get_page(page_name, used_story_data);
     page_name_input.value = page_name;
     page_text_input.value = page.text;
     page_buttons_input.value = page.next.reduce((a,b)=>{
 	return a + "," + b.name + ":" + b.text;
     },"").substr(1);
+
+    edit_modal_preview_button.page = page_name;
+    edit_modal_preview_button.story_data = used_story_data;
+    edit_modal.story_data = used_story_data;
     
     close_modals();
     edit_modal.showModal();
@@ -669,8 +674,12 @@ function get_page(page_name, used_story_data = story_data) {
     return used_story_data.pages.filter(page=>page.name==page_name)[0];
 }
 
-function close_modals() {
-    Array.from(document.getElementsByTagName('dialog')).map(e=>e.close());
+function close_modals(exceptions = []) {
+    Array.from(document.getElementsByTagName('dialog')).map(e=>{
+	if (!(exceptions.map(exception=>exception.test(e.id)).includes(true))) {
+	    e.close();
+	}
+    });
 }
 
 function save_edit() {
@@ -682,7 +691,7 @@ function save_edit() {
 	    }
 	}
     }
-    story_data.pages = story_data.pages.map(page=>{
+    edit_modal.story_data.pages = story_data.pages.map(page=>{
 	if (page.name != selected_page) {return page;}
 	page.name = page_name_input.value;
 	page.text = page_text_input.value;
@@ -693,9 +702,9 @@ function save_edit() {
 }
 
 function save_edit_title() {
-    story_data.title = title_page_title_input.value;
-    story_data.author = title_page_author_input.value;
-    story_data.description = title_page_description_input.value;
+    title_edit_modal.story_data.title = title_page_title_input.value;
+    title_edit_modal.story_data.author = title_page_author_input.value;
+    title_edit_modal.story_data.description = title_page_description_input.value;
 }
 
 function save_edit_image_links() {
