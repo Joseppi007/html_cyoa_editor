@@ -91,7 +91,7 @@
 	<button onclick="figure_out_theme('high contrast');">High Contrast Mode</button><br/>
 	<button onclick="figure_out_theme('haxor');" class="audiowide">H4X0R Mode</button><br/>
 	<button onclick="figure_out_theme('custom');">Custom Mode <span style="font-size: 0.75em">(Usually Recommended.)</span></button><br/>
-	<input type="checkbox" onclick="if(this.checked){baseBaseDelay=10;}else{baseBaseDelay=0;}baseDelay=baseBaseDelay;" id="type_effect_check_box"><label>Type Effect</label>
+	<input type="checkbox" onclick="if(this.checked){baseBaseDelay=10;}else{baseBaseDelay=0;}baseDelay=baseBaseDelay;" id="type_effect_check_box"><label for="type_effect_check_box">Type Effect</label>
 	<script>if(type_effect_check_box.checked){baseBaseDelay=10;}else{baseBaseDelay=0;}baseDelay=baseBaseDelay;</script>
       </div>
     </dialog>
@@ -108,63 +108,63 @@
 	<p>There are a lot of colors here, and I'll let you change all of them.</p>
 	<table>
 	  <tr>
-	    <th></th>
+	    <td></td>
 	    <th>Background</th>
 	    <th>Foreground</th>
 	  </tr>
 	  <tr>
 	    <td>Regular text on the page</td>
-	    <td><input type="color" id="custom_theme_color0"  onchange="story_data.custom_theme[0]=this.value;  update_custom_theme();"/></td>
-	    <td><input type="color" id="custom_theme_color1"  onchange="story_data.custom_theme[1]=this.value;  update_custom_theme();"/></td>
+	    <td><input type="color" id="custom_theme_color0"  onchange="story_data.custom_theme[0]=this.value;  update_custom_theme();"/><label for="custom_theme_color0" hidden>Regular text on the page background color</label></td>
+	    <td><input type="color" id="custom_theme_color1"  onchange="story_data.custom_theme[1]=this.value;  update_custom_theme();"/><label for="custom_theme_color1" hidden>Regular text on the page foreground color</label></td>
 	  </tr>
 	  <tr>
 	    <td>Buttons & Alike</td>
-	    <td><input type="color" id="custom_theme_color2"  onchange="story_data.custom_theme[2]=this.value;  update_custom_theme();"/></td>
-	    <td><input type="color" id="custom_theme_color3"  onchange="story_data.custom_theme[3]=this.value;  update_custom_theme();"/></td>
+	    <td><input type="color" id="custom_theme_color2"  onchange="story_data.custom_theme[2]=this.value;  update_custom_theme();"/><label for="custom_theme_color2" hidden>Buttons & Alike background color</label></td>
+	    <td><input type="color" id="custom_theme_color3"  onchange="story_data.custom_theme[3]=this.value;  update_custom_theme();"/><label for="custom_theme_color3" hidden>Buttons & Alike foreground color</label></td>
 	  </tr>
 	  <tr>
 	    <td>Buttons & Alike (hover)</td>
-	    <td><input type="color" id="custom_theme_color4"  onchange="story_data.custom_theme[4]=this.value;  update_custom_theme();"/></td>
-	    <td><input type="color" id="custom_theme_color5"  onchange="story_data.custom_theme[5]=this.value;  update_custom_theme();"/></td>
+	    <td><input type="color" id="custom_theme_color4"  onchange="story_data.custom_theme[4]=this.value;  update_custom_theme();"/><label for="custom_theme_color4" hidden>Buttons & Alike (hover) background color</label></td>
+	    <td><input type="color" id="custom_theme_color5"  onchange="story_data.custom_theme[5]=this.value;  update_custom_theme();"/><label for="custom_theme_color5" hidden>Buttons & Alike (hover) foreground color</label></td>
 	  </tr>
 	  <tr>
 	    <td>Buttons & Alike (active/clicking)</td>
-	    <td><input type="color" id="custom_theme_color6"  onchange="story_data.custom_theme[6]=this.value;  update_custom_theme();"/></td>
-	    <td><input type="color" id="custom_theme_color7"  onchange="story_data.custom_theme[7]=this.value;  update_custom_theme();"/></td>
+	    <td><input type="color" id="custom_theme_color6"  onchange="story_data.custom_theme[6]=this.value;  update_custom_theme();"/><label for="custom_theme_color6" hidden>Buttons & Alike (active/clicking) background color</label></td>
+	    <td><input type="color" id="custom_theme_color7"  onchange="story_data.custom_theme[7]=this.value;  update_custom_theme();"/><label for="custom_theme_color7" hidden>Buttons & Alike (active/clicking) foreground color</label></td>
 	  </tr>
 	  <tr>
 	    <td>Color Behind Popups</td>
-	    <td><input type="color" id="custom_theme_color8"  onchange="story_data.custom_theme[8]=this.value;  update_custom_theme();"/></td>
+	    <td><input type="color" id="custom_theme_color8"  onchange="story_data.custom_theme[8]=this.value;  update_custom_theme();"/><label for="custom_theme_color8" hidden>Color Behind Popups</label></td>
 	    <td></td>
 	  </tr>
 	  <tr>
 	    <td>Close/Danger Buttons</td>
-	    <td><input type="color" id="custom_theme_color9"  onchange="story_data.custom_theme[9]=this.value;  update_custom_theme();"/></td>
-	    <td><input type="color" id="custom_theme_color10" onchange="story_data.custom_theme[10]=this.value; update_custom_theme();"/></td>
+	    <td><input type="color" id="custom_theme_color9"  onchange="story_data.custom_theme[9]=this.value;  update_custom_theme();"/><label for="custom_theme_color9" hidden>Close/Danger Buttons background color</label></td>
+	    <td><input type="color" id="custom_theme_color10" onchange="story_data.custom_theme[10]=this.value; update_custom_theme();"/><label for="custom_theme_color10" hidden>Close/Danger Buttons foreground color</label></td>
 	  </tr>
 	  <tr>
 	    <td>Close/Danger Buttons (hover)</td>
-	    <td><input type="color" id="custom_theme_color11" onchange="story_data.custom_theme[11]=this.value; update_custom_theme();"/></td>
-	    <td><input type="color" id="custom_theme_color12" onchange="story_data.custom_theme[12]=this.value; update_custom_theme();"/></td>
+	    <td><input type="color" id="custom_theme_color11" onchange="story_data.custom_theme[11]=this.value; update_custom_theme();"/><label for="custom_theme_color11" hidden>Close/Danger Buttons (hover) background color</label></td>
+	    <td><input type="color" id="custom_theme_color12" onchange="story_data.custom_theme[12]=this.value; update_custom_theme();"/><label for="custom_theme_color12" hidden>Close/Danger Buttons (hover) foreground color</label></td>
 	  </tr>
 	  <tr>
 	    <td>Close/Danger Buttons (active/clicking)</td>
-	    <td><input type="color" id="custom_theme_color13" onchange="story_data.custom_theme[13]=this.value; update_custom_theme();"/></td>
-	    <td><input type="color" id="custom_theme_color14" onchange="story_data.custom_theme[14]=this.value; update_custom_theme();"/></td>
+	    <td><input type="color" id="custom_theme_color13" onchange="story_data.custom_theme[13]=this.value; update_custom_theme();"/><label for="custom_theme_color13" hidden>Close/Danger Buttons (active/clicking) background color</label></td>
+	    <td><input type="color" id="custom_theme_color14" onchange="story_data.custom_theme[14]=this.value; update_custom_theme();"/><label for="custom_theme_color14" hidden>Close/Danger Buttons (active/clicking) foreground color</label></td>
 	  </tr>
 	  <tr>
 	    <td>Highlighted/Selected Text (by user)</td>
-	    <td><input type="color" id="custom_theme_color15" onchange="story_data.custom_theme[15]=this.value; update_custom_theme();"/></td>
-	    <td><input type="color" id="custom_theme_color16" onchange="story_data.custom_theme[16]=this.value; update_custom_theme();"/></td>
+	    <td><input type="color" id="custom_theme_color15" onchange="story_data.custom_theme[15]=this.value; update_custom_theme();"/><label for="custom_theme_color15" hidden>Highlighted/Selected Text (by user) background color</label></td>
+	    <td><input type="color" id="custom_theme_color16" onchange="story_data.custom_theme[16]=this.value; update_custom_theme();"/><label for="custom_theme_color16" hidden>Highlighted/Selected Text (by user) foreground color</label></td>
 	  </tr>
 	  <tr>
 	    <td>Textareas</td>
-	    <td><input type="color" id="custom_theme_color17" onchange="story_data.custom_theme[17]=this.value; update_custom_theme();"/></td>
-	    <td><input type="color" id="custom_theme_color18" onchange="story_data.custom_theme[18]=this.value; update_custom_theme();"/></td>
+	    <td><input type="color" id="custom_theme_color17" onchange="story_data.custom_theme[17]=this.value; update_custom_theme();"/><label for="custom_theme_color17" hidden>Textareas background color</label></td>
+	    <td><input type="color" id="custom_theme_color18" onchange="story_data.custom_theme[18]=this.value; update_custom_theme();"/><label for="custom_theme_color18" hidden>Textareas foreground color</label></td>
 	  </tr>
 	  <tr>
 	    <td>Header/Footer Background</td>
-	    <td><input type="color" id="custom_theme_color19" onchange="story_data.custom_theme[19]=this.value; update_custom_theme();"/></td>
+	    <td><input type="color" id="custom_theme_color19" onchange="story_data.custom_theme[19]=this.value; update_custom_theme();"/><label for="custom_theme_color19" hidden>Header/Footer Background</label></td>
 	    <td></td>
 	  </tr>
 	</table>
