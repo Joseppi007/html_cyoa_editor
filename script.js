@@ -101,9 +101,6 @@ async function read_title_page(part = 0, used_story_data = story_data, keep_moda
 	};
 	story_footer.appendChild(button);
     }
-
-    close_modals();
-    story_modal.showModal();
 }
 
 function populateWithText(domElem, text, part = 0, delayMultiplier = 1, imgList = []) {

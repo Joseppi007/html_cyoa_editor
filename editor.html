@@ -22,7 +22,7 @@
       <button class="close" onclick="file_menu.close();">&times;</button>
       <h1>File</h1>
       <p>Save your story to a <span class="mono">.JSON</span> file or load a <span class="mono">.JSON</span> file.<br/>I thought about having a whole file manipulation piece of code, but then I remembered you can probably just copy/paste from the below textarea.</p>
-      <textarea id="story_data_json" onchange="story_data=JSON.parse(this.value);update_custom_theme();" style="width:90%;height:50%;"></textarea><br/>
+      <textarea id="story_data_json" onchange="story_data=JSON.parse(this.value);update_custom_theme();" style="width:90%;height:50%;"></textarea><br/><label hidden for="story_data_json">The story data in JSON form.</label>
       <button class="danger" onclick="story_data={title:'',author:'',description:'',pages:[],images:[],custom_theme:example_custom_theme.map(e=>e)};">New Story</button>
     </dialog>
     <dialog aria-modal="true" id="story_modal" class="hidden-overflow" onmousedown="baseDelay=0;" onmouseup="baseDelay=baseBaseDelay;" ontouchstart="baseDelay=0;" ontouchend="baseDelay=baseBaseDelay;">
@@ -64,9 +64,9 @@
     <dialog aria-modal="true" id="edit_modal" class="hidden-overflow">
       <button class="close" onclick="edit_modal.close();">&times;</button>
       <div id="edit_div" class="scroll-overflow" style="height: 100%;">
-	<h1>Page Name: <input id="page_name_input" style="font-size:1em;" onchange="save_edit();"/></h1>
+	<h1>Page Name: <input id="page_name_input" style="font-size:1em;" onchange="save_edit();"/><label for="" hidden>The name of the page.</label></h1>
 	<p>Text on the Page:</p>
-	<textarea id="page_text_input" style="width:90%;height:50%;" onchange="save_edit();"></textarea>
+	<textarea id="page_text_input" style="width:90%;height:50%;" onchange="save_edit();"></textarea><label for="page_text_input" hidden>Input for page text.</label>
 	<p>Option buttons, formatted as:<br/><span class="mono">Page Name:Option Text,Page Name:Option Text</span><br/>…or in other words, each option is seperated by a comma, and the options are divided into two pieces: The page it goes to and the text displayed for the option. These parts are seperated by a colon.</p>
 	<textarea id="page_buttons_input" style="width:90%;" onchange="save_edit();"></textarea></br>
 	<!--<button onclick="save_edit();">Save Changes</button>-->
@@ -76,11 +76,12 @@
     <dialog aria-modal="true" id="title_edit_modal" class="hidden-overflow">
       <button class="close" onclick="title_edit_modal.close();">&times;</button>
       <div id="edit_div" class="scroll-overflow" style="height: 100%;">
-	<h1>Title: <input id="title_page_title_input" style="font-size:1em;" onchange="save_edit_title();"/></h1>
-	<p>Author: <input id="title_page_author_input" style="font-size:1em;" onchange="save_edit_title();"/></p>
+	<h1>Title: <input id="title_page_title_input" style="font-size:1em;" onchange="save_edit_title();"/><label for="title_page_title_input" hidden>The title of the story.</label></h1>
+	<p>Author: <input id="title_page_author_input" style="font-size:1em;" onchange="save_edit_title();"/><label for="title_page_author_input" hidden>The author of the story.</label></p>
 	<p>Description:</p>
 	<textarea id="title_page_description_input" style="width:90%;height:50%;" onchange="save_edit_title();"></textarea>
 	<!--<button onclick="save_edit_title();">Save Changes</button>-->
+	<button onclick="read_title_page(0, this.story_data, [/edit_modal/]);" id="title_edit_modal_preview_button">Preview Title Page</button>
       </div>
     </dialog>
     <dialog aria-modal="true" id="options_modal" class="hidden-overflow">
@@ -99,7 +100,7 @@
       <button class="close" onclick="image_links_edit_modal.close();">&times;</button>
       <h1>Image Links</h1>
       <p>Please format the image links as <i>Reference Name</i>:<i>Link</i> with each link on its own line.<br/>The reference name is used when making scenes or placing characters in scenes, like {scene:<i>Reference</i>} or {scene_character(<i>Horizontal Position</i>, <i>Vertical Position</i>, <i>Name</i>):<i>Reference</i>}</p>
-      <textarea id="image_links_edit_input" onchange="save_edit_image_links(this.value);" style="width:90%;height:50%;"></textarea>
+      <textarea id="image_links_edit_input" onchange="save_edit_image_links(this.value);" style="width:90%;height:50%;"></textarea><label for="image_links_edit_input" hidden>Textarea for link references</label>
     </dialog>
     <dialog aria-modal="true" id="custom_theme_edit_modal" style="overflow: hidden;">
       <button class="close" onclick="custom_theme_edit_modal.close();">&times;</button>
