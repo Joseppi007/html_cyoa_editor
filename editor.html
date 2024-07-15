@@ -68,7 +68,7 @@
 	<p>Text on the Page:</p>
 	<textarea id="page_text_input" style="width:90%;height:50%;" onchange="save_edit();" title="Input for page text."></textarea><label for="page_text_input" hidden>Input for page text.</label>
 	<p>Option buttons, formatted as:<br/><span class="mono">Page Name:Option Text,Page Name:Option Text</span><br/>…or in other words, each option is seperated by a comma, and the options are divided into two pieces: The page it goes to and the text displayed for the option. These parts are seperated by a colon.</p>
-	<textarea id="page_buttons_input" style="width:90%;" onchange="save_edit();"></textarea></br>
+	<textarea id="page_buttons_input" style="width:90%;" onchange="save_edit();" title="Page buttons input area"></textarea></br>
 	<!--<button onclick="save_edit();">Save Changes</button>-->
 	<button onclick="read_page(this.page, 0, this.story_data, [/edit_modal/]);" id="edit_modal_preview_button">Preview Page</button>
       </div>
@@ -79,7 +79,7 @@
 	<h1>Title: <input id="title_page_title_input" style="font-size:1em;" onchange="save_edit_title();" title="The title of the story."/><label for="title_page_title_input" hidden>The title of the story.</label></h1>
 	<p>Author: <input id="title_page_author_input" style="font-size:1em;" onchange="save_edit_title();" title="The author of the story."/><label for="title_page_author_input" hidden>The author of the story.</label></p>
 	<p>Description:</p>
-	<textarea id="title_page_description_input" style="width:90%;height:50%;" onchange="save_edit_title();"></textarea>
+	<textarea id="title_page_description_input" style="width:90%;height:50%;" onchange="save_edit_title();" title="The description of the story."></textarea>
 	<!--<button onclick="save_edit_title();">Save Changes</button>-->
 	<button onclick="read_title_page(0, this.story_data, [/edit_modal/]);" id="title_edit_modal_preview_button">Preview Title Page</button>
       </div>
